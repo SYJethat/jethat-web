@@ -1,0 +1,282 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens to match JetHat's orange/dark theme */
+  --background: rgb(255, 255, 255); /* Dark background #1A1A1A */
+  --foreground: oklch(0% 0 0); /* Light text #F1F1F1 */
+  --card: oklch(63.095% 0.00117 13.822); /* Card background #2E2E2E */
+  --card-foreground: oklch(0.95 0 0); /* Card text */
+  --popover: oklch(78.901% 0.00449 16.155); /* Popover background */
+  --popover-foreground: oklch(0.95 0 0); /* Popover text */
+  --primary: oklch(0.65 0.15 45); /* Orange #FF8C00 */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.72 0.12 50); /* Lighter amber #FFB300 */
+  --secondary-foreground: oklch(0.11 0 0); /* Dark text on secondary */
+  --muted: oklch(73.74% 0.021 17.42); /* Muted background */
+  --muted-foreground: oklch(0.7 0 0); /* Muted text */
+  --accent: oklch(0.72 0.12 50); /* Accent color */
+  --accent-foreground: oklch(85.61% 0.00218 14.747); /* Text on accent */
+  --destructive: oklch(0.5 0.2 25); /* Error red */
+  --destructive-foreground: oklch(1 0 0); /* White text on destructive */
+  --border: oklch(0.3 0 0); /* Border color #4B4B4B */
+  --input: oklch(64.426% 0.00117 13.731); /* Input background */
+  --ring: oklch(0.65 0.15 45 / 0.5); /* Focus ring */
+  --chart-1: oklch(0.65 0.15 45);
+  --chart-2: oklch(0.72 0.12 50);
+  --chart-3: oklch(0.65 0.15 45);
+  --chart-4: oklch(0.72 0.12 50);
+  --chart-5: oklch(0.65 0.15 45);
+  --radius: 0.5rem;
+  --sidebar: oklch(62.862% 0.00719 16.802);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.65 0.15 45);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.72 0.12 50);
+  --sidebar-accent-foreground: oklch(89.449% 0.0001 271.152);
+  --sidebar-border: oklch(0.3 0 0);
+  --sidebar-ring: oklch(0.65 0.15 45 / 0.5);
+}
+
+.dark {
+  /* Dark mode uses same colors since JetHat is primarily dark themed */
+  --background: oklch(0.11 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.65 0.15 45);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.72 0.12 50);
+  --secondary-foreground: oklch(0.11 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.72 0.12 50);
+  --accent-foreground: oklch(0.11 0 0);
+  --destructive: oklch(0.5 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.3 0 0);
+  --input: oklch(0.18 0 0);
+  --ring: oklch(0.65 0.15 45 / 0.5);
+  --chart-1: oklch(0.65 0.15 45);
+  --chart-2: oklch(0.72 0.12 50);
+  --chart-3: oklch(0.65 0.15 45);
+  --chart-4: oklch(0.72 0.12 50);
+  --chart-5: oklch(0.65 0.15 45);
+  --sidebar: oklch(0.11 0 0);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.65 0.15 45);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.72 0.12 50);
+  --sidebar-accent-foreground: oklch(0.11 0 0);
+  --sidebar-border: oklch(0.3 0 0);
+  --sidebar-ring: oklch(0.65 0.15 45 / 0.5);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added custom animations for interactive elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 140, 0, 0.6);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+
+
+
+
+
+/* Slow rotation for the circle */
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Reverse rotation for the dashed thread line */
+@keyframes spin-slow-reverse {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 20s linear infinite;
+}
+
+/* Existing animations (ensure these are included) */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--primary);
+  }
+}
+
+.animate-typing {
+  overflow: hidden;
+  border-right: 2px solid var(--primary);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* Fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+/* Bounce animation for scroll down */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
