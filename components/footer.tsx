@@ -1,4 +1,4 @@
-import { Shield, Mail, Phone } from "lucide-react"
+import { Shield, Mail, Phone, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 
 export function Footer() {
   const services = [
@@ -79,6 +79,22 @@ export function Footer() {
               <li className="hover:text-primary cursor-pointer transition-colors">Terms of Service</li>
             </ul>
           </div>
+        </div>
+
+        {/* Social Media */}
+        <div className="mt-8 flex justify-center space-x-6">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors">
+            <Facebook className="h-6 w-6" />
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-muted-foreground hover:text-primary transition-colors">
+            <Twitter className="h-6 w-6" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
+            <Instagram className="h-6 w-6" />
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
+            <Linkedin className="h-6 w-6" />
+          </a>
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center">
