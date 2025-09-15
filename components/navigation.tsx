@@ -15,12 +15,12 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Menu, Shield, Sun, Moon, Plus, Minus } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useTheme } from "next-themes"
+
 import { useState, useEffect } from "react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+  // const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   // State for expanded mobile dropdowns
@@ -52,14 +52,16 @@ export function Navigation() {
 
   const technologyItems = [
     { name: "Core Technologies", href: "/technologies/core", description: "Our technology stack" },
-    { name: "Success Stories", href: "/technologies/success-stories", description: "Case studies and achievements" },
+    { name: "Case Study", href: "/technologies/casestudy", description: "Case Study" },
+    
     { name: "Innovation Lab", href: "/technologies/innovation", description: "Research and development" },
   ]
 
   const aboutItems = [
     { name: "Our Story", href: "/about/story", description: "Company history and mission" },
+    { name: "Success Stories", href: "/technologies/success-stories", description: "Case studies and achievements" },
     { name: "Team", href: "/about/team", description: "Meet our experts" },
-    { name: "Careers", href: "/about/careers", description: "Join our team" },
+    // { name: "Careers", href: "/about/careers", description: "Join our team" },
   ]
 
   // Toggle expand/collapse for mobile dropdown menus
@@ -151,21 +153,17 @@ export function Navigation() {
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                  <Link href="/careers" legacyBehavior passHref>
+                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                      Career
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            {/* Theme toggle button */}
-            <button
-              aria-label="Toggle Dark Mode"
-              type="button"
-              className="ml-4 rounded-md p-2 hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
+            
           </div>
 
           {/* CTA Button */}

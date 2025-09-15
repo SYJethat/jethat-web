@@ -7,6 +7,7 @@ import { Suspense } from "react"
 import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import { ScrollProgress } from "@/components/scroll-progress"
+import { ThemeToggle } from "@/components/themetogle"
 
 export const metadata: Metadata = {
   title: "JetHat Cyber Security - Securing Tomorrow's Digital Innovation",
@@ -35,6 +36,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Suspense fallback={null}>
             {children}
+
+            <ThemeToggle/>
             <ScrollProgress />
           </Suspense>
           <Analytics />

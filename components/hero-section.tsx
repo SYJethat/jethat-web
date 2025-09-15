@@ -107,10 +107,24 @@
 import { Button } from "@/components/ui/button"
 import { Shield, Lock, Zap, Globe, Mail, ShieldAlert, Search, BookOpen, Smartphone, Cloud, Code } from "lucide-react"
 import { IndustriesSection } from "./industries-section"
+import { ParticleBackground } from "./particle-background"
+import { TypingAnimation } from "./typing-animation"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { Tooltip } from "./tooltip"
+import { Modal } from "./modal"
+import { useState } from "react"
+import WhoWeAreSection from "./WhoWeAreSection"
+import { TestimonialsSection } from "./testimonials-section"
+import { AnimatedStats } from "./animated-stats"
 
 export function HeroSection() {
+  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation()
+  const [selectedService, setSelectedService] = useState<any>(null)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
   return (
     <div className="relative">
+      {/* <ParticleBackground /> */}
       {/* Hero Section */}
       <section id="home" className="min-h-screen   flex items-center justify-center relative overflow-hidden ">
         {/* Background Pattern */}
@@ -130,37 +144,31 @@ export function HeroSection() {
                   artificial intelligence, and cloud solutions to protect your growth, empowering you to innovate boldly
                   without compromise.
                 </p>
-                <p className="text-lg text-primary font-semibold">अनुक्षणं रक्षामहे (We Protect Every Moment)</p>
+                <p className="text-lg text-primary font-semibold">
+                  <TypingAnimation text="अनुक्षणं रक्षामहे (We Protect Every Moment)" />
+                </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-primary hover:bg-secondary text-primary-foreground animate-pulse-glow">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-secondary text-primary-foreground animate-pulse-glow"
+                  onClick={() => setIsContactModalOpen(true)}
+                >
                   Free Consulting
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                  onClick={() => setIsContactModalOpen(true)}
                 >
                   Learn More
                 </Button>
               </div>
 
               {/* Stats */}
-              {/* <div className="grid grid-cols-3 gap-8 pt-8">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">2018</div>
-                  <div className="text-sm text-muted-foreground">Founded</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">22+</div>
-                  <div className="text-sm text-muted-foreground">Languages Supported</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">24/7</div>
-                  <div className="text-sm text-muted-foreground">Live Support</div>
-                </div>
-              </div> */}
+              {/* <AnimatedStats /> */}
             </div>
 
             {/* Visual Elements */}
@@ -246,76 +254,37 @@ export function HeroSection() {
                 points: ["Vulnerability Detection", "Comprehensive Analysis"],
                 icon: <Search className="w-8 h-8 text-primary" />,
               },
-            ].map((service, index) => (
-              <div key={index} className="bg-card p-6 rounded-lg border border-primary/20">
-                <div className="flex items-center gap-4 mb-4">
-                  {service.icon}
-                  <h3 className="text-xl font-semibold text-primary">{service.title}</h3>
+            ].map((service, index) => {
+              if (!service.title) return null
+              return (
+                <div
+                  key={index}
+                  className={`bg-card p-6 rounded-lg border border-primary/20 animate-fade-in hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 cursor-pointer ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                  ref={index === 0 ? servicesRef : null}
+                  onClick={() => setSelectedService(service)}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <Tooltip content={`${service.title} - Click to learn more`}>
+                      {service.icon}
+                    </Tooltip>
+                    <h3 className="text-xl font-semibold text-primary">{service.title}</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <ul className="list-disc pl-5 text-muted-foreground">
+                    {service.points.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
-                <ul className="list-disc pl-5 text-muted-foreground">
-                  {service.points.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* Who We Are Section */}
-      <section id="who-we-are" className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Who We Are</h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-            Jethat Cybersecurity Private Limited is a cutting-edge firm specializing in cybersecurity and software
-            development. With a relentless commitment to innovation, we safeguard digital landscapes through advanced
-            threat detection and robust software solutions.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Vision",
-                description: "Jethat Cybersecurity Private Limited envisions a digitally secure world, where businesses thrive without compromise on data integrity and user privacy.",
-              },
-              {
-                title: "Expertise",
-                description: "We specialize in cybersecurity and software development, boasting a team of seasoned professionals with deep knowledge in both domains.",
-              },
-              {
-                title: "Innovation",
-                description: "At the core of our ethos is innovation. We consistently leverage cutting-edge technologies to stay ahead of evolving cyber threats and deliver state-of-the-art software solutions.",
-              },
-              {
-                title: "Comprehensive Security",
-                description: "Our cybersecurity services encompass advanced threat detection, risk assessment, and proactive measures to fortify organizations against cyber threats.",
-              },
-              {
-                title: "Client-Centric Approach",
-                description: "Our focus is on understanding and addressing the specific challenges faced by our clients, ensuring tailored solutions that meet their objectives and exceed expectations.",
-              },
-              {
-                title: "Commitment to Quality",
-                description: "We adhere to the highest standards of quality in both cybersecurity practices and software development, ensuring reliability, scalability, and resilience in every solution we deliver.",
-              },
-              {
-                title: "Collaborative Partnerships",
-                description: "Building lasting partnerships with our clients is integral to our mission. We work closely with organizations, providing ongoing support and adapting our services to meet evolving needs.",
-              },
-              {
-                title: "Continuous Improvement",
-                description: "In fields of cybersecurity and software development, we remain agile and responsive. We continually refine our approaches, adopting emerging technologies to keep our clients at the forefront of digital innovation and security.",
-              },
-            ].map((item, index) => (
-              <div key={index} className="bg-card p-6 rounded-lg border border-primary/20">
-                <h3 className="text-xl font-semibold text-primary mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     <WhoWeAreSection />
 
 {/* Call to Action Section */}
       {/* <section id="cta" className="py-16 bg-primary text-primary-foreground">
@@ -419,7 +388,7 @@ export function HeroSection() {
       </section> */}
 
       {/* Our Clients Section */}
-      <section id="clients" className="py-16 bg-background">
+      {/* <section id="clients" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Trusted by Industry Leaders</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
@@ -427,20 +396,115 @@ export function HeroSection() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              "Tech Innovations Inc.",
-              "Global Banking Corp",
-              "Healthcare Solutions",
-              "Retail Enterprises",
-              "Manufacturing Group",
-              "Education Systems",
+              { name: "Tech Innovations Inc.", logo: "/placeholder-logo.png" },
+              { name: "Global Banking Corp", logo: "/placeholder-logo.png" },
+              { name: "Healthcare Solutions", logo: "/placeholder-logo.png" },
+              { name: "Retail Enterprises", logo: "/placeholder-logo.png" },
+              { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
+              { name: "Education Systems", logo: "/placeholder-logo.png" },
             ].map((client, index) => (
-              <div key={index} className="bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20">
-                <span className="text-primary font-semibold">{client} Logo</span>
+              <div key={index} className="bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105">
+                <img src={client.logo} alt={client.name} className="w-16 h-16 object-contain" />
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <section id="clients" className="py-16 bg-background">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Trusted by Industry Leaders</h2>
+    <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
+      We provide cybersecurity solutions to organizations across various industries.
+    </p>
+    <div className="overflow-hidden">
+      <div className="flex animate-marquee [--marquee-speed:20s] hover:pause-marquee">
+        {[
+          { name: "Tech Innovations Inc.", logo: "/placeholder-logo.png" },
+          { name: "Global Banking Corp", logo: "/placeholder-logo.png" },
+          { name: "Healthcare Solutions", logo: "/placeholder-logo.png" },
+          { name: "Retail Enterprises", logo: "/placeholder-logo.png" },
+          { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
+          { name: "Education Systems", logo: "/placeholder-logo.png" },
+          // Duplicate for seamless loop
+          { name: "Tech Innovations Inc.", logo: "/placeholder-logo.png" },
+          { name: "Global Banking Corp", logo: "/placeholder-logo.png" },
+          { name: "Healthcare Solutions", logo: "/placeholder-logo.png" },
+          { name: "Retail Enterprises", logo: "/placeholder-logo.png" },
+          { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
+          { name: "Education Systems", logo: "/placeholder-logo.png" },
+        ].map((client, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 mx-2"
+          >
+            <img src={client.logo} alt={client.name} className="w-16 h-16 object-contain" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  <style jsx>{`
+    .animate-marquee {
+      display: flex;
+      animation: marquee var(--marquee-speed) linear infinite;
+    }
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .pause-marquee:hover {
+      animation-play-state: paused;
+    }
+  `}</style>
+</section>
+
+      {/* Team Section */}
+      {/* <section id="team" className="py-16 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Meet Our Team</h2>
+          <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
+            Our diverse team of experts brings together decades of experience in cybersecurity, software development, and innovation.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "John Doe",
+                role: "CEO & Founder",
+                image: "/placeholder-user.jpg",
+                bio: "Leading JetHat with vision and expertise in cybersecurity since 2018.",
+              },
+              {
+                name: "Jane Smith",
+                role: "CTO",
+                image: "/placeholder-user.jpg",
+                bio: "Driving technological innovation and AI/ML development across projects.",
+              },
+              {
+                name: "Mike Johnson",
+                role: "Head of Security",
+                image: "/placeholder-user.jpg",
+                bio: "Ensuring the highest standards of cybersecurity for all our clients.",
+              },
+            ].map((member, index) => (
+              <div key={index} className="bg-card p-6 rounded-lg border border-primary/20 text-center group hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary/20 group-hover:border-primary transition-colors">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                </div>
+                <h3 className="text-xl font-semibold text-primary mb-2">{member.name}</h3>
+                <p className="text-muted-foreground mb-4">{member.role}</p>
+                <p className="text-sm text-muted-foreground">{member.bio}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section> */}
+
+      <TestimonialsSection />
 
       {/* Stay Updated Section */}
       <section id="stay-updated" className="py-16 bg-muted">
@@ -465,7 +529,81 @@ export function HeroSection() {
         </div>
       </section>
 
-      
+      {/* Service Detail Modal */}
+      <Modal
+        isOpen={!!selectedService}
+        onClose={() => setSelectedService(null)}
+        title={selectedService?.title || ""}
+      >
+        {selectedService && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              {selectedService.icon}
+              <h4 className="text-lg font-semibold">{selectedService.title}</h4>
+            </div>
+            <p className="text-muted-foreground">{selectedService.description}</p>
+            <div>
+              <h5 className="font-semibold mb-2">Key Features:</h5>
+              <ul className="list-disc pl-5 space-y-1">
+                {selectedService.points.map((point: string, i: number) => (
+                  <li key={i} className="text-sm text-muted-foreground">{point}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex justify-end gap-2 pt-4">
+              <Button variant="outline" onClick={() => setSelectedService(null)}>
+                Close
+              </Button>
+              <Button onClick={() => { setSelectedService(null); setIsContactModalOpen(true); }}>Contact Us</Button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      {/* Contact Modal */}
+      <Modal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+        title="Contact Us"
+      >
+        <div className="space-y-4">
+          <p className="text-muted-foreground">
+            Get in touch with our experts for a free consultation on your cybersecurity needs.
+          </p>
+          <form className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Name</label>
+              <input
+                type="text"
+                className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="Your name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Email</label>
+              <input
+                type="email"
+                className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="your@email.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Message</label>
+              <textarea
+                className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary h-24"
+                placeholder="Tell us about your project..."
+              />
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setIsContactModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Send Message</Button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+
     </div>
   )
 }
