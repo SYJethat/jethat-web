@@ -1,8 +1,6 @@
-# Case Study Implementation Tasks
-
-- [ ] Update app/technologies/case_study/page.tsx to display multiple case study cards
-- [ ] Add state management for modal and selected case study
-- [ ] Implement "Read More" button functionality to open modal
-- [ ] Add hover animations to case study cards
-- [ ] Create sample case study data for demonstration
-- [ ] Test modal opening and animations
+- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from NavigationMenuLink className for Home
+- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from NavigationMenuLink className for Contact
+- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from NavigationMenuLink className for Career
+- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from ListItem className
+- [x] Edit components/ui/navigation-menu.tsx to remove focus:bg-accent and data-[active=true]:hover:bg-accent from NavigationMenuLink className
+- [ ] Test the changes by running the development server and verifying no background on hover/focus

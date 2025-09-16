@@ -105,7 +105,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Shield, Lock, Zap, Globe, Mail, ShieldAlert, Search, BookOpen, Smartphone, Cloud, Code } from "lucide-react"
+import { Shield, Lock, Zap, Globe, Mail, ShieldAlert, Search, BookOpen, Smartphone, Cloud, Code, ChevronLeft, ChevronRight } from "lucide-react"
 import { IndustriesSection } from "./industries-section"
 import { ParticleBackground } from "./particle-background"
 import { TypingAnimation } from "./typing-animation"
@@ -116,7 +116,9 @@ import { useState } from "react"
 import WhoWeAreSection from "./WhoWeAreSection"
 import { TestimonialsSection } from "./testimonials-section"
 import { AnimatedStats } from "./animated-stats"
-
+import BGImage from "../public/cybersecurity-concept-collage-design.jpg"
+import Image from "next/image"
+import HomeServicesSection from "./home-service"
 export function HeroSection() {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation()
   const [selectedService, setSelectedService] = useState<any>(null)
@@ -129,8 +131,8 @@ export function HeroSection() {
       <section id="home" className="min-h-screen   flex items-center justify-center relative overflow-hidden ">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50" />
-        <div className="absolute inset-0 dark:bg-[url('/cybersecurity-network-pattern.jpg')] opacity-10" />
-
+        {/* <div className="absolute inset-0 dark:bg-[url('/cybersecurity-network-pattern.jpg')] opacity-10" /> */}
+<Image src={BGImage} alt="" fill className="absolute inset-0 opacity-10 object-cover" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
@@ -209,7 +211,7 @@ export function HeroSection() {
  <IndustriesSection />
 
  {/* Our Services Section */}
-      <section id="services" className="py-16 bg-muted">
+      {/* <section id="services" className="py-16 bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Our Services</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
@@ -281,7 +283,13 @@ export function HeroSection() {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
+
+
+      <HomeServicesSection/>
+
+      {/* Readme Section with Arrow Buttons */}
+      
 
       {/* Who We Are Section */}
      <WhoWeAreSection />
@@ -420,25 +428,25 @@ export function HeroSection() {
     <div className="overflow-hidden">
       <div className="flex animate-marquee [--marquee-speed:20s] hover:pause-marquee">
         {[
-          { name: "Tech Innovations Inc.", logo: "/placeholder-logo.png" },
-          { name: "Global Banking Corp", logo: "/placeholder-logo.png" },
-          { name: "Healthcare Solutions", logo: "/placeholder-logo.png" },
-          { name: "Retail Enterprises", logo: "/placeholder-logo.png" },
+          { name: "Tech Innovations Inc.", logo: "/image-1.png" },
+          { name: "Global Banking Corp", logo: "/image-2.png" },
+          { name: "Healthcare Solutions", logo: "/image-3.svg" },
+          { name: "Retail Enterprises", logo: "/logo2.png" },
           { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
-          { name: "Education Systems", logo: "/placeholder-logo.png" },
+          { name: "Education Systems", logo: "/placeholder-logo.svg" },
           // Duplicate for seamless loop
-          { name: "Tech Innovations Inc.", logo: "/placeholder-logo.png" },
-          { name: "Global Banking Corp", logo: "/placeholder-logo.png" },
-          { name: "Healthcare Solutions", logo: "/placeholder-logo.png" },
-          { name: "Retail Enterprises", logo: "/placeholder-logo.png" },
+          { name: "Tech Innovations Inc.", logo: "/image-1.png" },
+          { name: "Global Banking Corp", logo: "/image-2.png" },
+          { name: "Healthcare Solutions", logo: "/image-3.svg" },
+          { name: "Retail Enterprises", logo: "/logo2.png" },
           { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
-          { name: "Education Systems", logo: "/placeholder-logo.png" },
+          { name: "Education Systems", logo: "/placeholder-logo.svg" },
         ].map((client, index) => (
           <div
             key={index}
             className="flex-shrink-0 bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 mx-2"
           >
-            <img src={client.logo} alt={client.name} className="w-16 h-16 object-contain" />
+            <Image src={client.logo} alt={client.name} width={64} height={64} className="w-16 h-16 object-contain" />
           </div>
         ))}
       </div>

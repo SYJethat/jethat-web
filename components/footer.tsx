@@ -99,7 +99,7 @@ export function Footer() {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Copyright 2024 JetHat Cyber Security Pvt Ltd. All rights reserved.
+            Copyright 2025 JetHat Cyber Security Pvt Ltd. All rights reserved.
           </p>
         </div>
       </div>

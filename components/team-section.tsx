@@ -1,13 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-
+import Suraj from '../public/suraj.jpeg'
+import Dheeraj from '../public/dheeraj.png'
+import Rajat from '../public/rajat.jpeg'
+import Madhusudhan from '../public/madhusudhan.jpeg'
+import Pawan from '../public/pawan.jpeg'
+import Shashank from '../public/shashank.jpeg'
 export function TeamSection() {
   const team = [
     {
       name: "Dheeraj Kumar Singh",
       role: "Director & Promoter",
       description: "Guides vision, strategy, and innovation across cybersecurity and AI.",
-      initials: "DKS",
+      initials: Dheeraj,
     },
     {
       name: "Susheela",
@@ -19,31 +24,31 @@ export function TeamSection() {
       name: "Shashank Shukla",
       role: "Project Manager & Senior Android Developer",
       description: "Leads mobile and AI projects with expertise in AI/ML.",
-      initials: "SS",
+      initials: Shashank,
     },
     {
       name: "Madhusodhan Pandey",
       role: "Team Lead, Android Developer",
       description: "Manages Android development and team coordination.",
-      initials: "MP",
+      initials: Madhusudhan,
     },
     {
       name: "Rajat Sharma",
       role: "Senior Full Stack Developer",
       description: "Drives software excellence across full-stack development.",
-      initials: "RS",
+      initials: Rajat,
     },
     {
       name: "Pawan Joshi",
       role: "Full Stack Software Developer",
       description: "Builds robust solutions with comprehensive development skills.",
-      initials: "PJ",
+      initials: Pawan,
     },
     {
       name: "Suraj Yadav",
       role: "AI/ML Engineer & Backend Developer",
       description: "Advances AI research and applications with backend expertise.",
-      initials: "SY",
+      initials: Suraj,
     },
   ]
 
@@ -67,7 +72,8 @@ export function TeamSection() {
               <CardContent className="p-6">
                 <Avatar className="w-20 h-20 mx-auto mb-4 border-2 border-primary/20 group-hover:border-primary/50 transition-colors">
                   <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
-                    {member.initials}
+                    
+                    <img src={member.initials.src} alt=""  />
                   </AvatarFallback>
                 </Avatar>
                 <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
