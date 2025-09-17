@@ -69,7 +69,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GraduationCap, BookOpen, Building, Briefcase, Heart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function IndustriesSection() {
@@ -79,39 +79,49 @@ export function IndustriesSection() {
       title: "Education & E-Learning",
       description:
         "Virtual classrooms and multilingual content for remote and rural education providers, optimized for low connectivity.",
-      image: "https://via.placeholder.com/400x300?text=Education",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80",
     },
     {
       icon: BookOpen,
       title: "Research & Publishing",
       description:
         "OCR, NLP, and editing tools for academic journals and regional publishers, enabling efficient digitization.",
-      image: "https://via.placeholder.com/400x300?text=Research",
+      image: "https://images.unsplash.com/photo-1581093588401-7a1a1a1a1a1a?auto=format&fit=crop&w=400&q=80",
     },
     {
       icon: Building,
       title: "Government & Public Sector",
       description: "Secure document digitization, identity management, and compliance solutions for public services.",
-      image: "https://via.placeholder.com/400x300?text=Government",
+      image: "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=400&q=80",
     },
     {
       icon: Briefcase,
       title: "Enterprises & Startups",
       description: "Scalable, secure web, mobile, and cloud systems with continuous threat monitoring.",
-      image: "https://via.placeholder.com/400x300?text=Enterprises",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80",
     },
     {
       icon: Heart,
       title: "Healthcare & Finance",
       description: "Privacy-focused solutions for sensitive data, compliance with regulatory standards.",
-      image: "https://via.placeholder.com/400x300?text=Healthcare",
+      image: "https://images.unsplash.com/photo-1588776814546-1a1a1a1a1a1a?auto=format&fit=crop&w=400&q=80",
     },
   ];
 
-  const [selectedIndustry, setSelectedIndustry] = useState(industries[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const selectedIndustry = industries[currentIndex];
+
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % industries.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isHovered, industries.length]);
 
   return (
-    <section className="py-20 bg-secondary/20">
+    <section className="py-20 bg-secondary/20" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance">Industries We Serve</h2>
@@ -127,9 +137,9 @@ export function IndustriesSection() {
             {industries.map((industry, index) => (
               <li key={index}>
                 <button
-                  onClick={() => setSelectedIndustry(industry)}
+                  onClick={() => setCurrentIndex(index)}
                   className={`text-primary hover:text-primary/80 transition-colors ${
-                    selectedIndustry.title === industry.title ? 'font-bold underline' : ''
+                    currentIndex === index ? 'font-bold underline' : ''
                   }`}
                 >
                   {industry.title}

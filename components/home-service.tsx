@@ -9,7 +9,7 @@ const ServicesSection = () => {
       fullDescription: "Crafting seamless digital experiences through expert web development, where innovation meets user-centric design.",
       points: ["Full-stack development", "Responsive web design"],
       icon: <Code className="w-6 h-6 text-primary" />,
-      image: "https://via.placeholder.com/600x400?text=Web+Development",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Cloud Services",
@@ -17,7 +17,7 @@ const ServicesSection = () => {
       fullDescription: "Unlock unparalleled scalability and efficiency with our transformative cloud services, reshaping the way you harness and leverage digital resources.",
       points: ["Scalability", "Flexibility and Accessibility"],
       icon: <Cloud className="w-6 h-6 text-primary" />,
-      image: "https://via.placeholder.com/600x400?text=Cloud+Services",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Mobile Application Development",
@@ -25,7 +25,7 @@ const ServicesSection = () => {
       fullDescription: "Elevate your brand's presence and engagement with expertly crafted mobile applications.",
       points: ["Cross-Platform Compatibility", "User-Centric Design"],
       icon: <Smartphone className="w-6 h-6 text-primary" />,
-      image: "https://via.placeholder.com/600x400?text=Mobile+App+Development",
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Cyber Security",
@@ -33,7 +33,7 @@ const ServicesSection = () => {
       fullDescription: "Protect your computer systems, networks, and data from theft, damage, or unauthorized access.",
       points: ["Advanced Threat Detection and Prevention", "Security Awareness Training"],
       icon: <ShieldAlert className="w-6 h-6 text-primary" />,
-      image: "https://via.placeholder.com/600x400?text=Cyber+Security",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "E-Learning",
@@ -41,7 +41,7 @@ const ServicesSection = () => {
       fullDescription: "Revolutionize education with our e-learning services, fostering dynamic online learning experiences.",
       points: ["Accessibility", "Interactive Learning Tools"],
       icon: <BookOpen className="w-6 h-6 text-primary" />,
-      image: "https://via.placeholder.com/600x400?text=E-Learning",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Secure Code Review",
@@ -49,7 +49,7 @@ const ServicesSection = () => {
       fullDescription: "Elevate your software's security posture with our meticulous secure code review service, identifying and fortifying vulnerabilities for a resilient codebase.",
       points: ["Vulnerability Detection", "Comprehensive Analysis"],
       icon: <Search className="w-6 h-6 text-primary" />,
-      image: "https://via.placeholder.com/600x400?text=Secure+Code+Review",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=600&q=80",
     },
   ];
 
@@ -122,13 +122,13 @@ const ServicesSection = () => {
               >
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-chart-1 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                    <h3 className="text-2xl font-bold text-chart-1 mb-4 animate-fade-in" style={{ }}>
                       {selectedService.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                    <p className="text-gray-600 mb-4 animate-fade-in" style={{  }}>
                       {selectedService.fullDescription}
                     </p>
-                    <ul className="list-disc pl-5 text-gray-600 mb-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                    <ul className="list-disc pl-5 text-gray-600 mb-6 animate-fade-in" style={{  }}>
                       {selectedService.points.map((point, i) => (
                         <li key={i}>{point}</li>
                       ))}
@@ -139,7 +139,7 @@ const ServicesSection = () => {
                       src={selectedService.image}
                       alt={selectedService.title}
                       className="w-full h-auto max-h-64 object-cover rounded-lg shadow-md animate-fade-in"
-                      style={{ animationDelay: '0.4s' }}
+                      style={{  }}
                     />
                   </div>
                 </div>

@@ -105,7 +105,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Shield, Lock, Zap, Globe, Mail, ShieldAlert, Search, BookOpen, Smartphone, Cloud, Code, ChevronLeft, ChevronRight } from "lucide-react"
+import { Shield, Lock, Zap, Globe, Mail, ShieldAlert, Search, BookOpen, Smartphone, Cloud, Code, ChevronLeft, ChevronRight, Brain, Cpu, Terminal } from "lucide-react"
 import { IndustriesSection } from "./industries-section"
 import { ParticleBackground } from "./particle-background"
 import { TypingAnimation } from "./typing-animation"
@@ -119,6 +119,8 @@ import { AnimatedStats } from "./animated-stats"
 import BGImage from "../public/cybersecurity-concept-collage-design.jpg"
 import Image from "next/image"
 import HomeServicesSection from "./home-service"
+import AdvancedProtection from "./protection-section"
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 export function HeroSection() {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation()
   const [selectedService, setSelectedService] = useState<any>(null)
@@ -132,7 +134,7 @@ export function HeroSection() {
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50" />
         {/* <div className="absolute inset-0 dark:bg-[url('/cybersecurity-network-pattern.jpg')] opacity-10" /> */}
-<Image src={BGImage} alt="" fill className="absolute inset-0 opacity-10 object-cover" />
+{/* <Image src={BGImage} alt="" fill className="absolute inset-0 opacity-10 object-cover" /> */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
@@ -175,33 +177,88 @@ export function HeroSection() {
 
             {/* Visual Elements */}
             <div className="relative">
-              <div className="relative w-full h-96 flex items-center justify-center">
+              <div className="relative w-full h-screen flex items-center justify-center">
+      {/* Lottie animation */}
+      <DotLottieReact
+        src="https://lottie.host/1b2cb0a6-2be2-4784-8fa4-e2097b917540/2OubVzJbtD.lottie"
+        loop
+        autoplay
+        style={{ width: "100%", height: "100%" }}
+      />
+
+      {/* Optional overlay to match OKLCH color tint */}
+      {/* 
+      <div
+        className="absolute inset-0 mix-blend-multiply pointer-events-none"
+        style={{
+          backgroundColor: "oklch(0.646 0.222 41.116)",
+          opacity: 0.6,
+        }}
+      />
+      */}
+    
+                 
+                  {/* <div className="absolute inset-0 bg-red-600 mix-blend-multiply opacity-60 pointer-events-none" />
+</div> */}
                 {/* Central Shield */}
-                <div className="absolute inset-0 flex items-center justify-center">
+                {/* <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center animate-pulse-glow">
                     <Shield className="w-16 h-16 text-primary animate-float" />
                   </div>
-                </div>
+                </div> */}
 
-                {/* Floating Icons */}
-                <div
-                  className="absolute top-8 left-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-                  style={{ animationDelay: "0.5s" }}
-                >
-                  <Lock className="w-6 h-6 text-primary" />
-                </div>
-                <div
-                  className="absolute top-8 right-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-                  style={{ animationDelay: "1s" }}
-                >
-                  <Zap className="w-6 h-6 text-primary" />
-                </div>
-                <div
-                  className="absolute bottom-8 left-16 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-                  style={{ animationDelay: "1.5s" }}
-                >
-                  <Globe className="w-6 h-6 text-primary" />
-                </div>
+            {/* Floating Icons */}
+            {/* <div
+              className="absolute top-8 left-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "0.5s" }}
+            >
+              <Lock className="w-6 h-6 text-primary" />
+            </div>
+            <div
+              className="absolute top-8 right-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "1s" }}
+            >
+              <Zap className="w-6 h-6 text-primary" />
+            </div>
+            <div
+              className="absolute bottom-8 left-16 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "1.5s" }}
+            >
+              <Globe className="w-6 h-6 text-primary" />
+            </div> */}
+
+            {/* New Floating Icons for AI, ML, Cybersecurity, Hacking */}
+            {/* <div
+              className="absolute top-20 right-20 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "0.7s" }}
+            >
+              <Brain className="w-7 h-7 text-primary" />
+            </div>
+            <div
+              className="absolute top-32 right-12 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "1.2s" }}
+            >
+              <Cpu className="w-7 h-7 text-primary" />
+            </div>
+            <div
+              className="absolute bottom-20 right-16 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "1.7s" }}
+            >
+              <ShieldAlert className="w-7 h-7 text-primary" />
+            </div>
+            <div
+              className="absolute bottom-32 right-24 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+              style={{ animationDelay: "2.2s" }}
+            >
+              <Terminal className="w-7 h-7 text-primary" />
+            </div> */}
+
+                {/* Scanning Animation */}
+                {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-80 h-80 border border-primary/30 rounded-full relative">
+                    <div className="absolute top-0 left-1/2 w-1 h-40 bg-gradient-to-b from-primary to-transparent transform -translate-x-0.5 origin-bottom animate-spin" style={{ animationDuration: '8s' }}></div>
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -316,57 +373,7 @@ export function HeroSection() {
         </div>
       </section> */}
       {/* Enhanced Advanced Protection Section with Animated Threads */}
-      <section id="advanced-protection" className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Advanced Protection</h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-            Experience our comprehensive security approach that protects your digital assets from all angles.
-          </p>
-          <div className="relative flex justify-center items-center h-64 md:h-96">
-            {/* Rotating Circle with Threads */}
-            <div className="relative w-48 h-48 md:w-64 md:h-64 animate-spin-slow">
-              {/* Thread Lines (Dashed) */}
-              <div className="absolute  inset-0 border-2 border-dashed border-primary/30 rounded-full animate-spin-slow-reverse" />
-              {[
-                { name: "Encryption", icon: <Lock className="w-6 h-6 text-primary" /> },
-                { name: "Global Protection", icon: <Globe className="w-6 h-6 text-primary" /> },
-                { name: "Secure Infrastructure", icon: <Shield className="w-6 h-6 text-primary" /> },
-                { name: "AI Defense", icon: <Zap className="w-6 h-6 text-primary" /> },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="absolute w-24 h-24 bg-card rounded-full flex flex-col items-center justify-center border border-primary/20 animate-float"
-                  style={{
-                    transform: `rotate(${index * 90}deg) translate(100px) rotate(-${index * 90}deg)`,
-                    animationDelay: `${index * 0.3}s`,
-                  }}
-                >
-                  {item.icon}
-                  <span className="text-primary text-sm font-semibold mt-2 text-center">{item.name}</span>
-                </div>
-              ))}
-              {/* In-between Animated Icons */}
-              {[
-                <ShieldAlert className="w-5 h-5 text-primary/70" />,
-                <Lock className="w-5 h-5 text-primary/70" />,
-                <Zap className="w-5 h-5 text-primary/70" />,
-                <Globe className="w-5 h-5 text-primary/70" />,
-              ].map((icon, index) => (
-                <div
-                  key={`in-between-${index}`}
-                  className="absolute w-12 h-12 bg-card/50  rounded-full flex items-center justify-center animate-float"
-                  style={{
-                    transform: `rotate(${index * 90 + 45}deg) translate(80px) rotate(-${index * 90 + 45}deg)`,
-                    animationDelay: `${index * 0.4 + 0.15}s`,
-                  }}
-                >
-                  {icon}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <AdvancedProtection/>
 
       {/* Client Testimonials Section */}
       {/* <section id="testimonials" className="py-16 bg-muted">
