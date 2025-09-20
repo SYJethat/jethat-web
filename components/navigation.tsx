@@ -54,13 +54,13 @@ export function Navigation() {
   const technologyItems = [
     { name: "Core Technologies", href: "/technologies/core", description: "Our technology stack" },
     { name: "Case Study", href: "/technologies/casestudy", description: "Case Study" },
-    
+
     { name: "Innovation Lab", href: "/technologies/innovation", description: "Research and development" },
   ]
 
   const aboutItems = [
     { name: "Our Story", href: "/about/story", description: "Company history and mission" },
-    { name: "Success Stories", href: "/technologies/success-stories", description: "Case studies and achievements" },
+    { name: "Success Stories", href: "/about/success-stories", description: "Case studies and achievements" },
     { name: "Team", href: "/about/team", description: "Meet our experts" },
     // { name: "Careers", href: "/about/careers", description: "Join our team" },
   ]
@@ -89,16 +89,16 @@ export function Navigation() {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link href="/" legacyBehavior passHref>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                    <NavigationMenuLink className="inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium  hover:text-chart-1 hover:underline transition-colors  ">
                       Home
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>About</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className=" hover:bg-transparent hover:text-chart-1 hover:underline transition-colors">About</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    <ul className="grid w-[700px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {aboutItems.map((item) => (
                         <ListItem key={item.name} title={item.name} href={item.href}>
                           {item.description}
@@ -109,7 +109,7 @@ export function Navigation() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="hover:bg-transparent hover:text-chart-1 hover:underline transition-colors">Products</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {productItems.map((item) => (
@@ -122,7 +122,7 @@ export function Navigation() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="hover:bg-transparent hover:text-chart-1 hover:underline transition-colors">Services</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {serviceItems.map((item) => (
@@ -135,36 +135,36 @@ export function Navigation() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Technologies</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className=" hover:text-chart-1 hover:underline transition-colors">Technologies</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[600px]">
+                    <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] dark:text-foreground">
                       {technologyItems.map((item) => (
-                        <ListItem key={item.name} title={item.name} href={item.href}>
+                        <ListItem className="hover:text-chart-1" key={item.name} title={item.name} href={item.href}>
                           {item.description}
                         </ListItem>
                       ))}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-
+ <NavigationMenuItem>
+                  <Link href="/careers" legacyBehavior passHref>
+                    <NavigationMenuLink className=" hover:text-chart-1 hover:underline transition-colors group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors ">
+                      Career
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link href="/contact" legacyBehavior passHref>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                    <NavigationMenuLink className=" hover:text-chart-1 hover:underline transition-colors group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors  ">
                       Contact
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
-                  <Link href="/careers" legacyBehavior passHref>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md  px-4 py-2 text-sm font-medium transition-colors hover:text-accent-foreground focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                      Career
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
+               
               </NavigationMenuList>
             </NavigationMenu>
-            
+
           </div>
 
           {/* CTA Button */}
@@ -180,21 +180,21 @@ export function Navigation() {
               </Button>
             </SheetTrigger>
 
-            
+
             <SheetContent side="left" className="w-[300px] sm:w-[400px] overflow-y-auto">
-              
-              
-              
+
+
+
               <div className="flex flex-col space-y-4 mt-8 ">
 
                 {/* Logo */}
-          <Link href="/" className="  flex items-center justify-center space-x-2">
-            <img src={Logo.src} alt="JetHat Logo" className="h-32 w-auto" />
-            {/* <span className="text-xl font-bold text-foreground">JetHat</span> */}
-          </Link>
-                
+                <Link href="/" className="  flex items-center justify-center space-x-2">
+                  <img src={Logo.src} alt="JetHat Logo" className="h-32 w-auto" />
+                  {/* <span className="text-xl font-bold text-foreground">JetHat</span> */}
+                </Link>
+
                 {/* <div className="space-y-4"> */}
-<Link
+                <Link
                   href="/"
                   className="ml-8 mt-16 text-foreground hover:text-primary transition-colors duration-200 font-medium "
                   onClick={() => setIsOpen(false)}
@@ -202,11 +202,11 @@ export function Navigation() {
                   Home
                 </Link>
                 {/* </div> */}
-                
+
 
                 {/* About with toggle */}
                 <div className="space-y-2 ">
-                  <div className=" no-underline hover:underline ml-8 mr-6 flex items-center justify-between text-foreground font-medium py-2 cursor-pointer select-none" onClick={() => toggleMenu("about")}>
+                  <div className=" underline hover:underline ml-8 mr-6 flex items-center justify-between text-foreground font-medium py-2 cursor-pointer select-none" onClick={() => toggleMenu("about")}>
                     <span>About</span>
                     {expandedMenus["about"] ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                   </div>
@@ -220,7 +220,7 @@ export function Navigation() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-200 py-1 block ml-10 no-underline hover:underline"
+                        className="text-muted-foreground hover:text-foreground transition-colors duration-200 py-1 block ml-10 no-underline hover:underline"
                         onClick={() => setIsOpen(false)}
                       >
                         {item.name}
@@ -312,7 +312,7 @@ export function Navigation() {
                   Contact
                 </Link>
 
-                <Button className=" ml-8 mr-6 bg-primary hover:bg-secondary text-primary-foreground mt-2  item-center justify-center">Talk To Us</Button>
+                <Button className=" ml-8 mr-6 bg-transparent hover:bg-transparent text-foreground mt-2  item-center justify-center">Talk To Us</Button>
               </div>
             </SheetContent>
           </Sheet>

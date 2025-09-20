@@ -1,12 +1,6 @@
-- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from NavigationMenuLink className for Home
-- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from NavigationMenuLink className for Contact
-- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from NavigationMenuLink className for Career
-- [x] Edit components/navigation.tsx to remove hover:bg-accent and focus:bg-accent from ListItem className
-- [x] Edit components/ui/navigation-menu.tsx to remove focus:bg-accent and data-[active=true]:hover:bg-accent from NavigationMenuLink className
-- [ ] Test the changes by running the development server and verifying no background on hover/focus
-- [x] Add scanning animation with AI, ML, Cybersecurity, Hacking themed floating icons to components/hero-section.tsx
-- [x] Add rotating scan line animation overlay in components/hero-section.tsx right visual section
-- [x] Add Cybersecurity.gif as background to hero section visual elements
-- [ ] Test the scanning animation and GIF background visually and ensure responsiveness and no interference with existing elements
-- [x] Add auto-sliding navigation to Industries We Serve section every 3 seconds with pause on hover
-- [ ] Test the auto-sliding navigation in Industries We Serve section for smooth transitions and functionality
+- [x] Modify app/about/success-stories/page.tsx to implement full-page slider for success stories using Embla Carousel
+- [x] Wrap success stories in EmblaCarousel component
+- [x] Make each slide full page height (100vh)
+- [x] Add navigation buttons (prev/next) and dots for clicking
+- [ ] Ensure responsive design
+- [ ] Test the slider functionality

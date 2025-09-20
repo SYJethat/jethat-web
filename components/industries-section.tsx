@@ -121,7 +121,7 @@ export function IndustriesSection() {
   }, [isHovered, industries.length]);
 
   return (
-    <section className="py-20 bg-secondary/20" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <section className="py-20" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance">Industries We Serve</h2>
@@ -132,7 +132,7 @@ export function IndustriesSection() {
         </div>
 
         {/* Navigation */}
-        <nav className="sticky top-0 bg-secondary/20 z-10 py-4 border-b border-primary/20 mb-12">
+        <nav className="sticky top-0 z-10 py-4 border-b border-primary/20 mb-12">
           <ul className="flex flex-wrap justify-center gap-4">
             {industries.map((industry, index) => (
               <li key={index}>
@@ -159,7 +159,7 @@ export function IndustriesSection() {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className={`flex flex-col ${
               industries.indexOf(selectedIndustry) % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-            } items-center gap-6 bg-card p-6 rounded-lg border border-primary/20`}
+            } items-center gap-6 p-6 rounded-lg border border-primary/20`}
           >
             <div className="w-full md:w-1/2">
               <img

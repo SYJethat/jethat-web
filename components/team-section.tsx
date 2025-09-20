@@ -55,13 +55,13 @@ export function TeamSection() {
   return (
     <section id="team" className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance mb-4">Our Team</h2>
           <p className="text-xl text-muted-foreground text-pretty max-w-3xl mx-auto">
             Meet our experienced team of cybersecurity experts, AI researchers, and software developers who are
             passionate about building secure, innovative solutions.
           </p>
-        </div>
+        </div> */}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {team.map((member, index) => (
@@ -73,7 +73,7 @@ export function TeamSection() {
                 <Avatar className="w-20 h-20 mx-auto mb-4 border-2 border-primary/20 group-hover:border-primary/50 transition-colors">
                   <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
                     
-                    <img src={member.initials.src} alt=""  />
+                    {/* <img src={member.initials.src} alt=""  /> */}
                   </AvatarFallback>
                 </Avatar>
                 <h3 className="text-lg font-semibold mb-1">{member.name}</h3>

@@ -1,107 +1,3 @@
-// "use client"
-
-// import { Button } from "@/components/ui/button"
-// import { Shield, Lock, Zap, Globe } from "lucide-react"
-
-// export function HeroSection() {
-//   return (
-//     <section id="home" className="min-h-screen  flex items-center justify-center relative overflow-hidden">
-//       {/* Background Pattern */}
-//       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50" />
-//       <div className="absolute inset-0 bg-[url('/cybersecurity-network-pattern.jpg')] opacity-10" />
-
-//       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-//         <div className="grid lg:grid-cols-2 gap-12 items-center">
-//           {/* Content */}
-//           <div className="space-y-8">
-//             <div className="space-y-4">
-//               <h1 className="text-4xl md:text-6xl font-bold text-balance">
-//                 Empowering Tomorrow, <span className="text-primary">Securing Today</span>
-//               </h1>
-//               <p className="text-xl text-muted-foreground text-pretty max-w-2xl">
-//                 Innovate with Confidence in Cybersecurity and Software Excellence. At JetHat, we fuse cybersecurity,
-//                 artificial intelligence, and cloud solutions to protect your growth, empowering you to innovate boldly
-//                 without compromise.
-//               </p>
-//               {/* <div className="bg-card/50 p-4 rounded-lg border border-primary/20">
-//                 <p className="text-sm text-muted-foreground text-pretty">
-//                   <strong className="text-primary">Our Expertise:</strong> Comprehensive cybersecurity solutions, AI/ML
-//                   development with 22+ language support, full-stack web & mobile development, cloud services, and
-//                   innovative products like MagAI, Virtual Naani, and JetChat serving diverse industries worldwide.
-//                 </p>
-//               </div> */}
-//             </div>
-
-//             <div className="flex flex-col sm:flex-row gap-4">
-//               <Button size="lg" className="bg-primary hover:bg-secondary text-primary-foreground animate-pulse-glow">
-//                 Free Consulting
-//               </Button>
-//               <Button
-//                 size="lg"
-//                 variant="outline"
-//                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-//               >
-//                 Learn More
-//               </Button>
-//             </div>
-
-//             {/* Stats */}
-//             <div className="grid grid-cols-3 gap-8 pt-8">
-//               <div className="text-center">
-//                 <div className="text-2xl font-bold text-primary">2018</div>
-//                 <div className="text-sm text-muted-foreground">Founded</div>
-//               </div>
-//               <div className="text-center">
-//                 <div className="text-2xl font-bold text-primary">22+</div>
-//                 <div className="text-sm text-muted-foreground">Languages Supported</div>
-//               </div>
-//               <div className="text-center">
-//                 <div className="text-2xl font-bold text-primary">24/7</div>
-//                 <div className="text-sm text-muted-foreground">Live Support</div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Visual Elements */}
-//           <div className="relative">
-//             <div className="relative w-full h-96 flex items-center justify-center">
-//               {/* Central Shield */}
-//               <div className="absolute inset-0 flex items-center justify-center">
-//                 <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center animate-pulse-glow">
-//                   <Shield className="w-16 h-16 text-primary animate-float" />
-//                 </div>
-//               </div>
-
-//               {/* Floating Icons */}
-//               <div
-//                 className="absolute top-8 left-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-//                 style={{ animationDelay: "0.5s" }}
-//               >
-//                 <Lock className="w-6 h-6 text-primary" />
-//               </div>
-//               <div
-//                 className="absolute top-8 right-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-//                 style={{ animationDelay: "1s" }}
-//               >
-//                 <Zap className="w-6 h-6 text-primary" />
-//               </div>
-//               <div
-//                 className="absolute bottom-8 left-16 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-//                 style={{ animationDelay: "1.5s" }}
-//               >
-//                 <Globe className="w-6 h-6 text-primary" />
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
-
-
-
-
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -132,9 +28,9 @@ export function HeroSection() {
       {/* Hero Section */}
       <section id="home" className="min-h-screen   flex items-center justify-center relative overflow-hidden ">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50" />
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card opacity-50" /> */}
         {/* <div className="absolute inset-0 dark:bg-[url('/cybersecurity-network-pattern.jpg')] opacity-10" /> */}
-{/* <Image src={BGImage} alt="" fill className="absolute inset-0 opacity-10 object-cover" /> */}
+        {/* <Image src={BGImage} alt="" fill className="absolute inset-0 opacity-10 object-cover" /> */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
@@ -178,97 +74,100 @@ export function HeroSection() {
             {/* Visual Elements */}
             <div className="relative">
               <div className="relative w-full h-screen flex items-center justify-center">
-      {/* Lottie animation */}
-      <DotLottieReact
-        src="https://lottie.host/1b2cb0a6-2be2-4784-8fa4-e2097b917540/2OubVzJbtD.lottie"
-        loop
-        autoplay
-        style={{ width: "100%", height: "100%" }}
-      />
+                {/* Lottie animation */}
+                <DotLottieReact
+                  src="https://lottie.host/1b2cb0a6-2be2-4784-8fa4-e2097b917540/2OubVzJbtD.lottie"
+                  loop
+                  autoplay
+                  style={{ width: "40%", height: "40%" }}
+                />
 
-      {/* Optional overlay to match OKLCH color tint */}
-      {/* 
-      <div
-        className="absolute inset-0 mix-blend-multiply pointer-events-none"
-        style={{
-          backgroundColor: "oklch(0.646 0.222 41.116)",
-          opacity: 0.6,
-        }}
-      />
-      */}
-    
-                 
-                  {/* <div className="absolute inset-0 bg-red-600 mix-blend-multiply opacity-60 pointer-events-none" />
-</div> */}
-                {/* Central Shield */}
-                {/* <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center animate-pulse-glow">
-                    <Shield className="w-16 h-16 text-primary animate-float" />
-                  </div>
-                </div> */}
+                {/* Optional overlay to match OKLCH color tint */}
+               
+                  {/* <div
+                    className="absolute inset-0 mix-blend-multiply pointer-events-none"
+                    style={{
+                      backgroundColor: "",
+                      opacity: 0.6,
+                      width:'40%', height: '40%',
+                      top:"10%"
+                    }}
+                  /> */}
 
-            {/* Floating Icons */}
-            {/* <div
-              className="absolute top-8 left-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "0.5s" }}
-            >
-              <Lock className="w-6 h-6 text-primary" />
-            </div>
-            <div
-              className="absolute top-8 right-8 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "1s" }}
-            >
-              <Zap className="w-6 h-6 text-primary" />
-            </div>
-            <div
-              className="absolute bottom-8 left-16 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "1.5s" }}
-            >
-              <Globe className="w-6 h-6 text-primary" />
-            </div> */}
 
-            {/* New Floating Icons for AI, ML, Cybersecurity, Hacking */}
-            {/* <div
-              className="absolute top-20 right-20 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "0.7s" }}
-            >
-              <Brain className="w-7 h-7 text-primary" />
-            </div>
-            <div
-              className="absolute top-32 right-12 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "1.2s" }}
-            >
-              <Cpu className="w-7 h-7 text-primary" />
-            </div>
-            <div
-              className="absolute bottom-20 right-16 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "1.7s" }}
-            >
-              <ShieldAlert className="w-7 h-7 text-primary" />
-            </div>
-            <div
-              className="absolute bottom-32 right-24 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
-              style={{ animationDelay: "2.2s" }}
-            >
-              <Terminal className="w-7 h-7 text-primary" />
-            </div> */}
 
-                {/* Scanning Animation */}
-                {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-80 h-80 border border-primary/30 rounded-full relative">
-                    <div className="absolute top-0 left-1/2 w-1 h-40 bg-gradient-to-b from-primary to-transparent transform -translate-x-0.5 origin-bottom animate-spin" style={{ animationDuration: '8s' }}></div>
-                  </div>
-                </div> */}
+                  {/* <div className="absolute inset-0 bg-red-600 mix-blend-multiply opacity-60 pointer-events-none" /> */}
+              </div>
+              {/* Central Shield */}
+              {/* <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center animate-pulse-glow">
+                  <Shield className="w-16 h-16 text-primary animate-float" />
+                </div>
+              </div> */}
+
+              {/* Floating Icons */}
+              <div
+                className="absolute top-36 left-24 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "0.5s" }}
+              >
+                <Lock className="w-6 h-6 text-primary" />
+              </div>
+              <div
+                className="absolute top-36 right-36 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "1s" }}
+              >
+                <Zap className="w-6 h-6 text-primary" />
+              </div>
+              {/* <div
+                className="absolute bottom-36 left-16 w-12 h-12 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "1.5s" }}
+              >
+                <Globe className="w-6 h-6 text-primary" />
+              </div> */}
+
+              {/* New Floating Icons for AI, ML, Cybersecurity, Hacking */}
+              <div
+                className="absolute top-58 right-3 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "0.7s" }}
+              >
+                <Brain className="w-7 h-7 text-primary" />
+              </div>
+              <div
+                className="absolute top-32 right-2 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "1.2s" }}
+              >
+                <Cpu className="w-7 h-7 text-primary" />
+              </div>
+              {/* <div
+                className="absolute bottom-20 right-16 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "1.7s" }}
+              >
+                <ShieldAlert className="w-7 h-7 text-primary" />
+              </div>
+              <div
+                className="absolute bottom-36 right-58 w-14 h-14 bg-card rounded-lg flex items-center justify-center animate-float"
+                style={{ animationDelay: "2.2s" }}
+              >
+                <Terminal className="w-7 h-7 text-primary" />
+              </div> */}
+
+              {/* Scanning Animation */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-80 h-80 border border-primary/30 rounded-full relative">
+                  <div className="absolute top-0 left-1/2 w-1 h-40 bg-gradient-to-b from-primary to-transparent transform -translate-x-0.5 origin-bottom animate-spin" style={{ animationDuration: '8s' }}></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        
+    </div>
+    
+      </section >
 
- <IndustriesSection />
+    <IndustriesSection />
 
- {/* Our Services Section */}
-      {/* <section id="services" className="py-16 bg-muted">
+  {/* Our Services Section */ }
+  {/* <section id="services" className="py-16 bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Our Services</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
@@ -343,16 +242,16 @@ export function HeroSection() {
       </section> */}
 
 
-      <HomeServicesSection/>
+  <HomeServicesSection />
 
-      {/* Readme Section with Arrow Buttons */}
-      
+  {/* Readme Section with Arrow Buttons */ }
 
-      {/* Who We Are Section */}
-     <WhoWeAreSection />
 
-{/* Call to Action Section */}
-      {/* <section id="cta" className="py-16 bg-primary text-primary-foreground">
+  {/* Who We Are Section */ }
+  <WhoWeAreSection />
+
+  {/* Call to Action Section */ }
+  {/* <section id="cta" className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Ready to Secure Your Digital Future?</h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
@@ -372,11 +271,11 @@ export function HeroSection() {
           </div>
         </div>
       </section> */}
-      {/* Enhanced Advanced Protection Section with Animated Threads */}
-      <AdvancedProtection/>
+  {/* Enhanced Advanced Protection Section with Animated Threads */ }
+  <AdvancedProtection />
 
-      {/* Client Testimonials Section */}
-      {/* <section id="testimonials" className="py-16 bg-muted">
+  {/* Client Testimonials Section */ }
+  {/* <section id="testimonials" className="py-16 bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">What Our Clients Say</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
@@ -402,8 +301,8 @@ export function HeroSection() {
         </div>
       </section> */}
 
-      {/* Our Clients Section */}
-      {/* <section id="clients" className="py-16 bg-background">
+  {/* Our Clients Section */ }
+  {/* <section id="clients" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Trusted by Industry Leaders</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
@@ -426,40 +325,40 @@ export function HeroSection() {
         </div>
       </section> */}
 
-      <section id="clients" className="py-16 bg-background">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Trusted by Industry Leaders</h2>
-    <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-      We provide cybersecurity solutions to organizations across various industries.
-    </p>
-    <div className="overflow-hidden">
-      <div className="flex animate-marquee [--marquee-speed:20s] hover:pause-marquee">
-        {[
-          { name: "Tech Innovations Inc.", logo: "/image-1.png" },
-          { name: "Global Banking Corp", logo: "/image-2.png" },
-          { name: "Healthcare Solutions", logo: "/image-3.svg" },
-          { name: "Retail Enterprises", logo: "/logo2.png" },
-          { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
-          { name: "Education Systems", logo: "/placeholder-logo.svg" },
-          // Duplicate for seamless loop
-          { name: "Tech Innovations Inc.", logo: "/image-1.png" },
-          { name: "Global Banking Corp", logo: "/image-2.png" },
-          { name: "Healthcare Solutions", logo: "/image-3.svg" },
-          { name: "Retail Enterprises", logo: "/logo2.png" },
-          { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
-          { name: "Education Systems", logo: "/placeholder-logo.svg" },
-        ].map((client, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 mx-2"
-          >
-            <Image src={client.logo} alt={client.name} width={64} height={64} className="w-16 h-16 object-contain" />
-          </div>
-        ))}
+  <section id="clients" className="py-16 bg-background">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Trusted by Industry Leaders</h2>
+      <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
+        We provide cybersecurity solutions to organizations across various industries.
+      </p>
+      <div className="overflow-hidden">
+        <div className="flex animate-marquee [--marquee-speed:20s] hover:pause-marquee">
+          {[
+            { name: "Tech Innovations Inc.", logo: "/image-1.png" },
+            { name: "Global Banking Corp", logo: "/image-2.png" },
+            { name: "Healthcare Solutions", logo: "/image-3.svg" },
+            { name: "Retail Enterprises", logo: "/logo2.png" },
+            { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
+            { name: "Education Systems", logo: "/placeholder-logo.svg" },
+            // Duplicate for seamless loop
+            { name: "Tech Innovations Inc.", logo: "/image-1.png" },
+            { name: "Global Banking Corp", logo: "/image-2.png" },
+            { name: "Healthcare Solutions", logo: "/image-3.svg" },
+            { name: "Retail Enterprises", logo: "/logo2.png" },
+            { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
+            { name: "Education Systems", logo: "/placeholder-logo.svg" },
+          ].map((client, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 mx-2"
+            >
+              <Image src={client.logo} alt={client.name} width={64} height={64} className="w-16 h-16 object-contain" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-  <style jsx>{`
+    <style jsx>{`
     .animate-marquee {
       display: flex;
       animation: marquee var(--marquee-speed) linear infinite;
@@ -476,10 +375,10 @@ export function HeroSection() {
       animation-play-state: paused;
     }
   `}</style>
-</section>
+  </section>
 
-      {/* Team Section */}
-      {/* <section id="team" className="py-16 bg-background">
+  {/* Team Section */ }
+  {/* <section id="team" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Meet Our Team</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
@@ -519,106 +418,106 @@ export function HeroSection() {
         </div>
       </section> */}
 
-      <TestimonialsSection />
+  <TestimonialsSection />
 
-      {/* Stay Updated Section */}
-      <section id="stay-updated" className="py-16 bg-muted">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Stay Updated</h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Subscribe to our newsletter for the latest cybersecurity insights, trends, and updates.
-          </p>
-          <div className="flex justify-center max-w-md mx-auto">
-            <div className="flex w-full">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 p-3 rounded-l-lg border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <Button className="bg-primary hover:bg-secondary text-primary-foreground rounded-l-none">
-                Subscribe
-              </Button>
-            </div>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">We respect your privacy. You can unsubscribe at any time.</p>
+  {/* Stay Updated Section */ }
+  <section id="stay-updated" className="py-16 bg-muted">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold mb-8">Stay Updated</h2>
+      <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+        Subscribe to our newsletter for the latest cybersecurity insights, trends, and updates.
+      </p>
+      <div className="flex justify-center max-w-md mx-auto">
+        <div className="flex w-full">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 p-3 rounded-l-lg border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          <Button className="bg-primary hover:bg-secondary text-primary-foreground rounded-l-none">
+            Subscribe
+          </Button>
         </div>
-      </section>
-
-      {/* Service Detail Modal */}
-      <Modal
-        isOpen={!!selectedService}
-        onClose={() => setSelectedService(null)}
-        title={selectedService?.title || ""}
-      >
-        {selectedService && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              {selectedService.icon}
-              <h4 className="text-lg font-semibold">{selectedService.title}</h4>
-            </div>
-            <p className="text-muted-foreground">{selectedService.description}</p>
-            <div>
-              <h5 className="font-semibold mb-2">Key Features:</h5>
-              <ul className="list-disc pl-5 space-y-1">
-                {selectedService.points.map((point: string, i: number) => (
-                  <li key={i} className="text-sm text-muted-foreground">{point}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex justify-end gap-2 pt-4">
-              <Button variant="outline" onClick={() => setSelectedService(null)}>
-                Close
-              </Button>
-              <Button onClick={() => { setSelectedService(null); setIsContactModalOpen(true); }}>Contact Us</Button>
-            </div>
-          </div>
-        )}
-      </Modal>
-
-      {/* Contact Modal */}
-      <Modal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        title="Contact Us"
-      >
-        <div className="space-y-4">
-          <p className="text-muted-foreground">
-            Get in touch with our experts for a free consultation on your cybersecurity needs.
-          </p>
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Name</label>
-              <input
-                type="text"
-                className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
-              <input
-                type="email"
-                className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="your@email.com"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Message</label>
-              <textarea
-                className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary h-24"
-                placeholder="Tell us about your project..."
-              />
-            </div>
-            <div className="flex justify-end gap-2">
-              <Button variant="outline" onClick={() => setIsContactModalOpen(false)}>
-                Cancel
-              </Button>
-              <Button type="submit">Send Message</Button>
-            </div>
-          </form>
-        </div>
-      </Modal>
-
+      </div>
+      <p className="text-sm text-muted-foreground mt-4">We respect your privacy. You can unsubscribe at any time.</p>
     </div>
+  </section>
+
+  {/* Service Detail Modal */ }
+  <Modal
+    isOpen={!!selectedService}
+    onClose={() => setSelectedService(null)}
+    title={selectedService?.title || ""}
+  >
+    {selectedService && (
+      <div className="space-y-4">
+        <div className="flex items-center gap-4">
+          {selectedService.icon}
+          <h4 className="text-lg font-semibold">{selectedService.title}</h4>
+        </div>
+        <p className="text-muted-foreground">{selectedService.description}</p>
+        <div>
+          <h5 className="font-semibold mb-2">Key Features:</h5>
+          <ul className="list-disc pl-5 space-y-1">
+            {selectedService.points.map((point: string, i: number) => (
+              <li key={i} className="text-sm text-muted-foreground">{point}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex justify-end gap-2 pt-4">
+          <Button variant="outline" onClick={() => setSelectedService(null)}>
+            Close
+          </Button>
+          <Button onClick={() => { setSelectedService(null); setIsContactModalOpen(true); }}>Contact Us</Button>
+        </div>
+      </div>
+    )}
+  </Modal>
+
+  {/* Contact Modal */ }
+  <Modal
+    isOpen={isContactModalOpen}
+    onClose={() => setIsContactModalOpen(false)}
+    title="Contact Us"
+  >
+    <div className="space-y-4">
+      <p className="text-muted-foreground">
+        Get in touch with our experts for a free consultation on your cybersecurity needs.
+      </p>
+      <form className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium mb-1">Name</label>
+          <input
+            type="text"
+            className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Your name"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Email</label>
+          <input
+            type="email"
+            className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="your@email.com"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Message</label>
+          <textarea
+            className="w-full p-2 border border-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary h-24"
+            placeholder="Tell us about your project..."
+          />
+        </div>
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" onClick={() => setIsContactModalOpen(false)}>
+            Cancel
+          </Button>
+          <Button type="submit">Send Message</Button>
+        </div>
+      </form>
+    </div>
+  </Modal>
+
+    </div >
   )
 }
