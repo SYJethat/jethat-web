@@ -117,7 +117,7 @@ const ServicesSection = () => {
             {selectedService ? (
               <div
                 key={selectedService.title}
-                className="animate-slide-in-right opacity-0 translate-x-10"
+                className="animate-slide-in-right opacity-0 translate-x-0"
                 style={{ animationDuration: '0.5s', animationFillMode: 'forwards' }}
               >
                 <div className="flex flex-col md:flex-row gap-6">
