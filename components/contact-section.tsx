@@ -8,8 +8,25 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-20 bg-card/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className=" bg-card/50">
+
+
+
+       {/* Hero Section */}
+        <section className="py-20 bg-gradient-to-br from-background to-secondary/20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-6">
+              <h1 className="text-4xl md:text-5xl font-bold text-balance">Contact and Join Us</h1>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+                At JetHat, you'll contribute to transformative projects in AI/ML, cybersecurity, and localized
+                technology. Our collaborative, ethical, and innovative culture fosters continuous learning and
+                meaningful impact.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      <div className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance mb-4">Get In Touch</h2>
           <p className="text-xl text-muted-foreground text-pretty max-w-3xl mx-auto">
@@ -64,11 +81,11 @@ export function ContactSection() {
               <CardHeader>
                 <CardTitle>Why Choose JetHat?</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <CardContent className="space-y-2">
+                <div className="grid grid-cols-4 gap-4">
                   <div className="text-center p-3 bg-primary/10 rounded-lg">
                     <div className="text-lg font-bold text-primary">Free</div>
-                    <div className="text-xs text-muted-foreground">Consultations</div>
+                    <div className="text-xs">Consultations</div>
                   </div>
                   <div className="text-center p-3 bg-primary/10 rounded-lg">
                     <div className="text-lg font-bold text-primary">24/7</div>
@@ -94,14 +111,14 @@ export function ContactSection() {
             </CardHeader>
             <CardContent>
               <form className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <Input placeholder="First Name" />
-                  <Input placeholder="Last Name" />
+                <div className="grid grid-cols-2 gap-4 ">
+                  <Input placeholder="First Name" className=" dark:bg-primary-foreground" />
+                  <Input placeholder="Last Name" className="dark:bg-primary-foreground"/>
                 </div>
-                <Input placeholder="Email Address" type="email" />
-                <Input placeholder="Phone Number" type="tel" />
-                <Input placeholder="Company (Optional)" />
-                <Textarea placeholder="Tell us about your project or security needs..." rows={4} />
+                <Input placeholder="Email Address" type="email" className="dark:bg-primary-foreground" />
+                <Input placeholder="Phone Number" type="tel"  className="dark:bg-primary-foreground"/>
+                <Input placeholder="Company (Optional)"  className="dark:bg-primary-foreground"/>
+                <Textarea placeholder="Tell us about your project or security needs..." rows={4} className="dark:bg-primary-foreground"/>
                 <Button className="w-full bg-primary hover:bg-secondary text-primary-foreground">Send Message</Button>
               </form>
             </CardContent>

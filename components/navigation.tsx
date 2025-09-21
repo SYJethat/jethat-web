@@ -113,7 +113,7 @@ export function Navigation() {
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {productItems.map((item) => (
-                        <ListItem key={item.name} title={item.name} href={item.href}>
+                        <ListItem className="hover:text-chart-1" key={item.name} title={item.name} href={item.href}>
                           {item.description}
                         </ListItem>
                       ))}
@@ -126,7 +126,7 @@ export function Navigation() {
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {serviceItems.map((item) => (
-                        <ListItem key={item.name} title={item.name} href={item.href}>
+                        <ListItem className="hover:text-chart-1" key={item.name} title={item.name} href={item.href}>
                           {item.description}
                         </ListItem>
                       ))}

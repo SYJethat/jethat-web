@@ -86,7 +86,7 @@ export function IndustriesSection() {
       title: "Research & Publishing",
       description:
         "OCR, NLP, and editing tools for academic journals and regional publishers, enabling efficient digitization.",
-      image: "https://images.unsplash.com/photo-1581093588401-7a1a1a1a1a1a?auto=format&fit=crop&w=400&q=80",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80",
     },
     {
       icon: Building,
@@ -104,7 +104,7 @@ export function IndustriesSection() {
       icon: Heart,
       title: "Healthcare & Finance",
       description: "Privacy-focused solutions for sensitive data, compliance with regulatory standards.",
-      image: "https://images.unsplash.com/photo-1588776814546-1a1a1a1a1a1a?auto=format&fit=crop&w=400&q=80",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80",
     },
   ];
 
@@ -121,7 +121,7 @@ export function IndustriesSection() {
   }, [isHovered, industries.length]);
 
   return (
-    <section className="py-20" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <section className="py-20"  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-balance">Industries We Serve</h2>

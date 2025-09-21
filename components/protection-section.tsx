@@ -1,64 +1,182 @@
-import { motion } from 'framer-motion';
-import { Lock, Globe, Shield, Zap, ShieldAlert, Activity, AlertTriangle, Wifi, Server } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { TypingAnimation } from './typing-animation';
-
-const featureItems = [
-  { name: 'Encryption', icon: <Lock className="w-8 h-8 text-primary" /> },
-  { name: 'Global Protection', icon: <Globe className="w-8 h-8 text-primary" /> },
-  { name: 'Secure Infrastructure', icon: <Shield className="w-8 h-8 text-primary" /> },
-  { name: 'AI Defense', icon: <Zap className="w-8 h-8 text-primary" /> },
-];
-
-const inBetweenIcons = [
-  <ShieldAlert className="w-6 h-6 text-primary/90" />,
-  <Lock className="w-6 h-6 text-primary/90" />,
-  <Zap className="w-6 h-6 text-primary/90" />,
-  <Globe className="w-6 h-6 text-primary/90" />,
-];
+import { motion } from "framer-motion";
+import {
+  Lock,
+  Globe,
+  Shield,
+  Zap,
+  ShieldAlert,
+  Activity,
+  AlertTriangle,
+  Wifi,
+  Server,
+  Terminal,
+  Cpu,
+  Cctv,
+} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { TypingAnimation } from "./typing-animation";
 
 const AdvancedProtection = () => {
   const [threatsBlocked, setThreatsBlocked] = useState(1247);
   const [scansPerformed, setScansPerformed] = useState(5678);
   const [activeScans, setActiveScans] = useState(3);
   const [uptime, setUptime] = useState(0);
-  const [threatLevel, setThreatLevel] = useState('LOW');
-  const [currentMessage, setCurrentMessage] = useState('');
-  const [alerts, setAlerts] = useState<{id: number, type: string, ip: string, time: string}[]>([]);
+  const [threatLevel, setThreatLevel] = useState("LOW");
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [alerts, setAlerts] = useState([]);
   const [scanProgress, setScanProgress] = useState(0);
+  const [commandInput, setCommandInput] = useState("");
+  const [terminalHistory, setTerminalHistory] = useState([
+    { type: "output", text: 'System initialized. Type "help" for commands.' },
+    { type: "output", text: "Running initial security scan..." },
+  ]);
+  const terminalRef = useRef(null);
 
   const messages = [
-    'Scanning network for vulnerabilities...',
-    'Detecting intrusion attempts...',
-    'Analyzing traffic patterns...',
-    'Checking firewall integrity...',
-    'Monitoring system logs...',
+    "Scanning network for vulnerabilities...",
+    "Detecting intrusion attempts...",
+    "Analyzing traffic patterns...",
+    "Checking firewall integrity...",
+    "Monitoring system logs...",
   ];
+
+  // Terminal commands and responses
+  const commands = {
+    help: {
+      response: [
+        "Available commands:",
+        "scan - Run security scan",
+        "status - Show system status",
+        "clear - Clear terminal",
+        "protect - Enable advanced protection",
+        "history - View attack history",
+      ],
+    },
+    scan: {
+      response: [
+        "Initiating deep scan...",
+        "Scanning ports 0-65535",
+        "Checking for known vulnerabilities...",
+      ],
+      action: () => {
+        setScanProgress(0);
+        const interval = setInterval(() => {
+          setScanProgress((prev) => {
+            if (prev >= 100) {
+              clearInterval(interval);
+              addToTerminal(
+                "output",
+                "Scan complete. 0 critical vulnerabilities found."
+              );
+              return 100;
+            }
+            return prev + 1;
+          });
+        }, 50);
+      },
+    },
+    status: {
+      response: [
+        `System Status:`,
+        `Threats Blocked: ${threatsBlocked}`,
+        `Active Scans: ${activeScans}`,
+        `Uptime: ${Math.floor(uptime / 3600)}h ${Math.floor(
+          (uptime % 3600) / 60
+        )}m ${uptime % 60}s`,
+        `Threat Level: ${threatLevel}`,
+      ],
+    },
+    clear: {
+      action: () => setTerminalHistory([]),
+    },
+    protect: {
+      response: [
+        "Enabling advanced protection matrix...",
+        "All systems secured.",
+      ],
+      action: () => {
+        setThreatLevel("LOW");
+        addToTerminal("output", "Protection level elevated to MAXIMUM");
+      },
+    },
+    history: {
+      response: ["Recent attack history:"],
+      action: () => {
+        alerts.slice(0, 5).forEach((alert) => {
+          addToTerminal(
+            "output",
+            `[${alert.time}] ${alert.type} from ${alert.ip} - BLOCKED`
+          );
+        });
+      },
+    },
+  };
+
+  const addToTerminal = (type, text) => {
+    setTerminalHistory((prev) => [...prev, { type, text }]);
+  };
+
+  const handleCommand = (cmd) => {
+    addToTerminal("command", `user@security:~$ ${cmd}`);
+
+    if (commands[cmd]) {
+      if (commands[cmd].response) {
+        commands[cmd].response.forEach((line) => addToTerminal("output", line));
+      }
+      if (commands[cmd].action) {
+        commands[cmd].action();
+      }
+    } else {
+      addToTerminal(
+        "output",
+        `Command not found: ${cmd}. Type "help" for available commands.`
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [terminalHistory]);
 
   useEffect(() => {
     const threatInterval = setInterval(() => {
-      setThreatsBlocked(prev => prev + Math.floor(Math.random() * 5) + 1);
+      setThreatsBlocked((prev) => prev + Math.floor(Math.random() * 5) + 1);
     }, 2000);
 
     const scanInterval = setInterval(() => {
-      setScansPerformed(prev => prev + Math.floor(Math.random() * 10) + 1);
+      setScansPerformed((prev) => prev + Math.floor(Math.random() * 10) + 1);
     }, 1500);
 
     const activeScanInterval = setInterval(() => {
-      setActiveScans(prev => Math.max(0, prev + (Math.random() > 0.5 ? 1 : -1)));
+      setActiveScans((prev) =>
+        Math.max(0, prev + (Math.random() > 0.5 ? 1 : -1))
+      );
     }, 3000);
 
     const uptimeInterval = setInterval(() => {
-      setUptime(prev => prev + 1);
+      setUptime((prev) => prev + 1);
     }, 1000);
 
     const threatLevelInterval = setInterval(() => {
-      const levels = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
-      setThreatLevel(levels[Math.floor(Math.random() * levels.length)]);
+      const levels = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
+      const weights = [0.6, 0.3, 0.08, 0.02]; // Weighted probabilities
+      let num = Math.random();
+      let s = 0;
+      let levelIndex = levels.length - 1;
+      for (let i = 0; i < weights.length; i++) {
+        s += weights[i];
+        if (num < s) {
+          levelIndex = i;
+          break;
+        }
+      }
+      setThreatLevel(levels[levelIndex]);
     }, 10000);
 
     const progressInterval = setInterval(() => {
-      setScanProgress(prev => (prev + 1) % 101);
+      setScanProgress((prev) => (prev + 0.5) % 101);
     }, 100);
 
     let messageIndex = 0;
@@ -69,15 +187,40 @@ const AdvancedProtection = () => {
 
     const alertInterval = setInterval(() => {
       if (Math.random() > 0.7) {
-        const threatTypes = ['SQL Injection', 'XSS Attack', 'DDoS Attempt', 'Brute Force', 'Malware Detected', 'Phishing Attempt', 'Ransomware Block'];
-        const ips = ['192.168.1.1', '10.0.0.5', '172.16.0.10', '203.0.113.1', '198.51.100.2', '104.28.1.1', '8.8.8.8'];
+        const threatTypes = [
+          "SQL Injection",
+          "XSS Attack",
+          "DDoS Attempt",
+          "Brute Force",
+          "Malware",
+          "Phishing",
+          "Ransomware",
+        ];
+        const ips = [
+          "192.168.1.",
+          "10.0.0.",
+          "172.16.0.",
+          "203.0.113.",
+          "198.51.100.",
+        ].map((prefix) => prefix + Math.floor(Math.random() * 255));
         const newAlert = {
           id: Date.now(),
           type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
           ip: ips[Math.floor(Math.random() * ips.length)],
           time: new Date().toLocaleTimeString(),
         };
-        setAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
+        setAlerts((prev) => [newAlert, ...prev.slice(0, 4)]);
+
+        // Add critical alerts to terminal
+        if (
+          newAlert.type === "DDoS Attempt" ||
+          newAlert.type === "Ransomware"
+        ) {
+          addToTerminal(
+            "alert",
+            `WARNING: ${newAlert.type} detected from ${newAlert.ip}`
+          );
+        }
       }
     }, 5000);
 
@@ -93,162 +236,277 @@ const AdvancedProtection = () => {
     };
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (commandInput.trim()) {
+      handleCommand(commandInput.trim().toLowerCase());
+      setCommandInput("");
+    }
+  };
+
   return (
-    <section id="advanced-protection" className="py-16 bg-background text-foreground font-mono">
+    <section
+      id="advanced-protection"
+      className="py-12 bg-background text-foreground font-mono"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-foreground">Advanced Protection</h2>
-        <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-          Experience our comprehensive security approach that protects your digital assets from all angles.
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-foreground">
+          Advanced Protection System
+        </h2>
+        <p className="text-lg text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+          Real-time threat detection and prevention system active
         </p>
 
-        {/* Live Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
-          <div className="bg-card p-6 rounded-lg border border-primary/20">
-            <div className="flex items-center mb-2">
-              <ShieldAlert className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold">Threats Blocked</span>
+        {/* Live Stats - More compact */}
+        {/* <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+          <div className="bg-card p-2 rounded-lg border border-primary/20">
+            <div className="flex items-center mb-1">
+              <ShieldAlert className="w-3 h-3 text-primary mr-2" />
+              <span className="text-primary text-sm font-semibold">Threats Blocked</span>
             </div>
-            <div className="text-2xl font-bold text-foreground">{threatsBlocked.toLocaleString()}</div>
+            <div className="text-xl font-bold text-foreground">{threatsBlocked.toLocaleString()}</div>
           </div>
-          <div className="bg-card p-6 rounded-lg border border-primary/20">
-            <div className="flex items-center mb-2">
-              <Activity className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold">Scans Performed</span>
+          <div className="bg-card p-4 rounded-lg border border-primary/20">
+            <div className="flex items-center mb-1">
+              <Activity className="w-5 h-5 text-primary mr-2" />
+              <span className="text-primary text-sm font-semibold">Scans</span>
             </div>
-            <div className="text-2xl font-bold text-foreground">{scansPerformed.toLocaleString()}</div>
+            <div className="text-xl font-bold text-foreground">{scansPerformed.toLocaleString()}</div>
           </div>
-          <div className="bg-card p-6 rounded-lg border border-primary/20">
-            <div className="flex items-center mb-2">
-              <Zap className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold">Active Scans</span>
+          <div className="bg-card p-4 rounded-lg border border-primary/20">
+            <div className="flex items-center mb-1">
+              <Zap className="w-5 h-5 text-primary mr-2" />
+              <span className="text-primary text-sm font-semibold">Active</span>
             </div>
-            <div className="text-2xl font-bold text-foreground">{activeScans}</div>
+            <div className="text-xl font-bold text-foreground">{activeScans}</div>
           </div>
-          <div className="bg-card p-6 rounded-lg border border-primary/20">
-            <div className="flex items-center mb-2">
-              <Server className="w-6 h-6 text-primary mr-2" />
-              <span className="text-primary font-semibold">System Uptime</span>
+          <div className="bg-card p-4 rounded-lg border border-primary/20">
+            <div className="flex items-center mb-1">
+              <Server className="w-5 h-5 text-primary mr-2" />
+              <span className="text-primary text-sm font-semibold">Uptime</span>
             </div>
-            <div className="text-2xl font-bold text-foreground">{Math.floor(uptime / 3600)}h {Math.floor((uptime % 3600) / 60)}m {uptime % 60}s</div>
+            <div className="text-xl font-bold text-foreground">{Math.floor(uptime / 3600)}h {Math.floor((uptime % 3600) / 60)}m</div>
           </div>
-          <div className="bg-card p-6 rounded-lg border border-primary/20">
-            <div className="flex items-center mb-2">
-              <AlertTriangle className={`w-6 h-6 mr-2 ${threatLevel === 'LOW' ? 'text-green-500' : threatLevel === 'MEDIUM' ? 'text-yellow-500' : threatLevel === 'HIGH' ? 'text-orange-500' : 'text-red-500'}`} />
-              <span className="text-primary font-semibold">Threat Level</span>
+          <div className="bg-card p-4 rounded-lg border border-primary/20">
+            <div className="flex items-center mb-1">
+              <AlertTriangle className={`w-5 h-5 mr-2 ${threatLevel === 'LOW' ? 'text-green-500' : threatLevel === 'MEDIUM' ? 'text-yellow-500' : threatLevel === 'HIGH' ? 'text-orange-500' : 'text-red-500'}`} />
+              <span className="text-primary text-sm font-semibold">Threat Level</span>
             </div>
-            <div className={`text-2xl font-bold ${threatLevel === 'LOW' ? 'text-green-500' : threatLevel === 'MEDIUM' ? 'text-yellow-500' : threatLevel === 'HIGH' ? 'text-orange-500' : 'text-red-500'}`}>{threatLevel}</div>
+            <div className={`text-xl font-bold ${threatLevel === 'LOW' ? 'text-green-500' : threatLevel === 'MEDIUM' ? 'text-yellow-500' : threatLevel === 'HIGH' ? 'text-orange-500' : 'text-red-500'}`}>{threatLevel}</div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Rotating Circle */}
-          <div className="relative flex justify-center items-center h-64 md:h-96">
-            <div className="relative w-48 h-48 md:w-64 md:h-64 animate-spin-slow">
-              <div className="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full animate-spin-slow-reverse" />
-              {[
-                { name: "Encryption", icon: <Lock className="w-6 h-6 text-primary" /> },
-                { name: "Global Protection", icon: <Globe className="w-6 h-6 text-primary" /> },
-                { name: "Secure Infrastructure", icon: <Shield className="w-6 h-6 text-primary" /> },
-                { name: "AI Defense", icon: <Zap className="w-6 h-6 text-primary" /> },
-              ].map((item, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Security Visualization - More compact */}
+          {/* <div className="relative flex justify-center items-center h-56 md:h-72 bg-card rounded-lg border border-primary/20 p-4">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-dashed border-primary/30 animate-pulse"></div>
+            </div>
+            
+            <div className="relative z-10 grid grid-cols-2 gap-3 w-full max-w-xs">
+              <div className="bg-background/80 p-3 rounded-lg border border-primary/20 flex flex-col items-center">
+                <Shield className="w-6 h-6 text-primary mb-1" />
+                <span className="text-xs text-primary font-semibold">Firewall</span>
+                <span className="text-xs text-green-500">Active</span>
+              </div>
+              <div className="bg-background/80 p-3 rounded-lg border border-primary/20 flex flex-col items-center">
+                <Cpu className="w-6 h-6 text-primary mb-1" />
+                <span className="text-xs text-primary font-semibold">AI Defense</span>
+                <span className="text-xs text-green-500">Online</span>
+              </div>
+              <div className="bg-background/80 p-3 rounded-lg border border-primary/20 flex flex-col items-center">
+                <Globe className="w-6 h-6 text-primary mb-1" />
+                <span className="text-xs text-primary font-semibold">Network</span>
+                <span className="text-xs text-green-500">Secure</span>
+              </div>
+              <div className="bg-background/80 p-3 rounded-lg border border-primary/20 flex flex-col items-center">
+                <Cctv className="w-6 h-6 text-primary mb-1" />
+                <span className="text-xs text-primary font-semibold">Monitoring</span>
+                <span className="text-xs text-green-500">24/7</span>
+              </div>
+            </div>
+
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center">
+              <div className="flex space-x-1">
+                {[1, 2, 3, 4, 5].map(i => (
+                  <div key={i} className={`w-2 h-2 rounded-full ${i <= activeScans ? 'bg-green-500' : 'bg-primary/20'}`}></div>
+                ))}
+              </div>
+            </div>
+          </div> */}
+          <div className="relative flex justify-center items-center h-56 md:h-72 bg-transparent rounded-lg border border-green-500/30 p-4 overflow-hidden">
+            {/* Container top and bottom bars */}
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gray-700"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-2 bg-gray-700"></div>
+
+            {/* Test tube holders */}
+            <div className="absolute top-1 left-3 w-2 h-3 bg-green-500 rounded-t-full"></div>
+            <div className="absolute top-1 right-3 w-2 h-3 bg-green-500 rounded-t-full"></div>
+
+            {/* Scanning effect - now from bottom to top */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute left-0 right-0 h-1 bg-green-400 shadow-[0_0_15px_5px_rgba(0,255,0,0.5)] animate-scan-updown"></div>
+            </div>
+
+            {/* Grid of security elements */}
+            <div className="relative z-10 grid grid-cols-2 gap-3 w-full max-w-xs">
+              <div className=" p-3 rounded border border-green-500/20 flex flex-col items-center backdrop-blur-sm">
+                <Shield className="w-5 h-5 text-green-400 mb-1" />
+                <span className="text-xs text-green-400 font-semibold">
+                  Firewall
+                </span>
+                <span className="text-xs text-green-500">Active</span>
+              </div>
+              <div className=" p-3 rounded border border-green-500/20 flex flex-col items-center backdrop-blur-sm">
+                <Cpu className="w-5 h-5 text-green-400 mb-1" />
+                <span className="text-xs text-green-400 font-semibold">
+                  AI Defense
+                </span>
+                <span className="text-xs text-green-500">Online</span>
+              </div>
+              <div className=" p-3 rounded border border-green-500/20 flex flex-col items-center backdrop-blur-sm">
+                <Globe className="w-5 h-5 text-green-400 mb-1" />
+                <span className="text-xs text-green-400 font-semibold">
+                  Network
+                </span>
+                <span className="text-xs text-green-500">Secure</span>
+              </div>
+              <div className=" p-3 rounded border border-green-500/20 flex flex-col items-center backdrop-blur-sm">
+                <Cctv className="w-5 h-5 text-green-400 mb-1" />
+                <span className="text-xs text-green-400 font-semibold">
+                  Monitoring
+                </span>
+                <span className="text-xs text-green-500">24/7</span>
+              </div>
+            </div>
+
+            {/* Status indicators */}
+            <div className="absolute bottom-2 left-0 right-0 flex justify-between items-center px-4">
+              <div className="text-xs text-green-400 font-mono flex items-center">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                SCANNING
+              </div>
+              <div className="flex space-x-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      i <= activeScans ? "bg-green-500" : "bg-gray-600"
+                    }`}
+                  ></div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pulsing border effect */}
+            <div className="absolute inset-0 rounded border border-green-400/20 animate-pulse-slow pointer-events-none"></div>
+          </div>
+
+          <style jsx>{`
+            @keyframes scan-updown {
+              0% {
+                top: 100%;
+                opacity: 0.7;
+              }
+              50% {
+                top: 0%;
+                opacity: 1;
+              }
+              100% {
+                top: 100%;
+                opacity: 0.7;
+              }
+            }
+            @keyframes pulse-slow {
+              0%,
+              100% {
+                opacity: 0.3;
+              }
+              50% {
+                opacity: 0.6;
+              }
+            }
+            .animate-scan-updown {
+              animation: scan-updown 3s ease-in-out infinite;
+            }
+            .animate-pulse-slow {
+              animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+          `}</style>
+
+          {/* Terminal Interface - More interactive */}
+          <div className="rounded-lg border border-primary/20 h-56 md:h-72 overflow-hidden flex flex-col">
+            <div className="flex items-center px-4 py-2 bg-primary/10">
+              <div className="flex space-x-1 mr-3">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-green-400 text-sm font-semibold">
+                security-terminal
+              </span>
+              <div className="ml-auto flex items-center">
+                <div className="text-xs text-green-400 bg-primary/10 px-2 py-1 rounded">
+                  {threatLevel} THREAT
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="flex-1 overflow-auto p-3 bg-background font-mono text-sm"
+              ref={terminalRef}
+            >
+              {terminalHistory.map((item, index) => (
                 <div
                   key={index}
-                  className="absolute w-24 h-24 bg-card rounded-full flex flex-col items-center justify-center border border-primary/20 animate-float"
-                  style={{
-                    transform: `rotate(${index * 90}deg) translate(100px) rotate(-${index * 90}deg)`,
-                    animationDelay: `${index * 0.3}s`,
-                  }}
+                  className={`mb-1 ${
+                    item.type === "command"
+                      ? "text-green-400"
+                      : item.type === "alert"
+                      ? "text-green-4000 animate-pulse"
+                      : "text-foreground"
+                  }`}
                 >
-                  {item.icon}
-                  <span className="text-primary text-sm font-semibold mt-2 text-center">{item.name}</span>
+                  {item.type === "command" ? (
+                    <span>{item.text}</span>
+                  ) : (
+                    <span>&gt; {item.text}</span>
+                  )}
                 </div>
               ))}
-              {[
-                <ShieldAlert className="w-5 h-5 text-primary/70" />,
-                <Lock className="w-5 h-5 text-primary/70" />,
-                <Zap className="w-5 h-5 text-primary/70" />,
-                <Globe className="w-5 h-5 text-primary/70" />,
-              ].map((icon, index) => (
-                <div
-                  key={`in-between-${index}`}
-                  className="absolute w-12 h-12 bg-card/50 rounded-full flex items-center justify-center animate-float"
-                  style={{
-                    transform: `rotate(${index * 90 + 45}deg) translate(80px) rotate(-${index * 90 + 45}deg)`,
-                    animationDelay: `${index * 0.4 + 0.15}s`,
-                  }}
-                >
-                  {icon}
-                </div>
-              ))}
+              <div className="text-green-400 mb-1">
+                <TypingAnimation text={currentMessage} speed={30} />
+              </div>
             </div>
-          </div>
 
-          {/* Terminal Interface */}
-          <div className="bg-card p-6 rounded-lg border border-primary/20 h-64 md:h-96 overflow-hidden">
-            <div className="flex items-center mb-4">
-              <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-primary text-sm">security-terminal</span>
-            </div>
-            <div className="w-full bg-primary/20 rounded-full h-2 mb-4">
-              <div className="bg-primary h-2 rounded-full transition-all duration-300" style={{width: `${scanProgress}%`}}></div>
-            </div>
-            <div className="text-foreground text-sm mb-4">
-              <span className="text-primary">$</span> <TypingAnimation key={currentMessage} text={currentMessage} speed={50} />
-            </div>
-            <div className="bg-background p-2 rounded mb-4 font-mono text-xs">
-              <div className="text-primary mb-1">Running security scan...</div>
-              <TypingAnimation text="nmap -sV -O 192.168.1.0/24" speed={30} delay={1000} className="text-foreground" />
-              <br />
-              <TypingAnimation text="firewall --check-rules" speed={30} delay={3000} className="text-foreground" />
-              <br />
-              <TypingAnimation text="ai-defense --analyze-logs" speed={30} delay={5000} className="text-foreground" />
-              <br />
-              <TypingAnimation text="user@jet-hat:~$" speed={50} delay={7000} className="text-primary" />
-              <br />
-              <TypingAnimation text="sudo ./run-advanced-protection" speed={50} delay={7500} className="text-foreground" />
-            </div>
-            <div className="space-y-2 text-xs overflow-y-auto h-24">
-              {alerts.map((alert) => (
-                <motion.div
-                  key={alert.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="flex items-center text-destructive animate-pulse"
-                >
-                  <AlertTriangle className="w-4 h-4 mr-2" />
-                  [{alert.time}] {alert.type} from {alert.ip} - BLOCKED
-                </motion.div>
-              ))}
+            <div className="border-t border-primary/20 p-2">
+              <form onSubmit={handleSubmit} className="flex items-center">
+                <span className="text-green-400 mr-2">user@security:~$</span>
+                <input
+                  type="text"
+                  value={commandInput}
+                  onChange={(e) => setCommandInput(e.target.value)}
+                  className="flex-1 bg-transparent text-green-400 outline-none font-mono text-sm"
+                  placeholder="Type a command..."
+                />
+                {commandInput && (
+                  <button
+                    type="submit"
+                    className="ml-2 text-green-400 text-sm font-semibold"
+                  >
+                    ↵
+                  </button>
+                )}
+              </form>
             </div>
           </div>
         </div>
-      </div>
 
-      <style jsx>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes spin-slow-reverse {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-        }
-        .animate-spin-slow-reverse {
-          animation: spin-slow-reverse 15s linear infinite;
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
+        {/* Continuous Security Event Log */}
+       
+       
+     
+      </div>
     </section>
   );
 };

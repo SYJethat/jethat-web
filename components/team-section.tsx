@@ -9,46 +9,52 @@ import Shashank from '../public/shashank.jpeg'
 export function TeamSection() {
   const team = [
     {
-      name: "Dheeraj Kumar Singh",
+      name: "ABC",
       role: "Director & Promoter",
       description: "Guides vision, strategy, and innovation across cybersecurity and AI.",
-      initials: Dheeraj,
+      initials: "",
     },
     {
-      name: "Susheela",
+      name: "BCA",
       role: "Director",
       description: "Oversees governance, operations, and strategic partnerships.",
       initials: "S",
     },
     {
-      name: "Shashank Shukla",
+      name: "NCP",
       role: "Project Manager & Senior Android Developer",
       description: "Leads mobile and AI projects with expertise in AI/ML.",
-      initials: Shashank,
+      initials: "",
     },
     {
-      name: "Madhusodhan Pandey",
+      name: "ABC",
       role: "Team Lead, Android Developer",
       description: "Manages Android development and team coordination.",
-      initials: Madhusudhan,
+      initials: "",
     },
     {
-      name: "Rajat Sharma",
+      name: "APP",
       role: "Senior Full Stack Developer",
       description: "Drives software excellence across full-stack development.",
-      initials: Rajat,
+      initials: "",
     },
     {
-      name: "Pawan Joshi",
+      name: "BJXYZP",
       role: "Full Stack Software Developer",
       description: "Builds robust solutions with comprehensive development skills.",
-      initials: Pawan,
+      initials: "",
     },
     {
-      name: "Suraj Yadav",
+      name: "ABCSP",
       role: "AI/ML Engineer & Backend Developer",
       description: "Advances AI research and applications with backend expertise.",
-      initials: Suraj,
+      initials:"",
+    },
+    {
+      name: "ABCSP",
+      role: "AI/ML Engineer & Backend Developer",
+      description: "Advances AI research and applications with backend expertise.",
+      initials:"",
     },
   ]
 

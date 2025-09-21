@@ -20,24 +20,24 @@ export function Footer() {
 
   return (
     <footer className="bg-background border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 sm:px-6 sm:justify-items-center lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center md:place-items-start">
           {/* Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+          <div className="space-y-4 text-center md:text-left w-full md:w-auto">
+            <div className="flex items-center justify-center md:justify-start space-x-2">
               <Shield className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">JetHat Cyber Security Pvt Ltd</span>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground max-w-sm mx-auto md:mx-0">
               Securing Tomorrow's Digital Innovation since 2018. Empowering businesses with cybersecurity, AI, and cloud
               solutions.
             </p>
             <div className="space-y-2 text-sm">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-center md:justify-start space-x-2">
                 <Phone className="w-4 h-4 text-primary" />
                 <span>+91-120-4188947</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-center md:justify-start space-x-2">
                 <Mail className="w-4 h-4 text-primary" />
                 <span>info@jethat.in</span>
               </div>
@@ -45,7 +45,7 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="text-center md:text-left w-full md:w-auto">
             <h3 className="font-semibold mb-4">Our Services</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {services.map((service, index) => (
@@ -57,7 +57,7 @@ export function Footer() {
           </div>
 
           {/* Technologies */}
-          <div>
+          <div className="text-center md:text-left w-full md:w-auto">
             <h3 className="font-semibold mb-4">Technologies</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {technologies.map((tech, index) => (
@@ -69,7 +69,7 @@ export function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <div className="text-center md:text-left w-full md:w-auto">
             <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="hover:text-primary cursor-pointer transition-colors">Career</li>
