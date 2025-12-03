@@ -36,12 +36,16 @@ export function Navigation() {
   }
 
   const productItems = [
-    { name: "MagAI", href: "/products/magai", description: "AI-powered content management" },
-    { name: "Virtual Naani", href: "/products/virtual-naani", description: "AI grandmother for elderly care" },
-    { name: "JetChat", href: "/products/jetchat", description: "Multilingual chatbot platform" },
-    { name: "JetOCR", href: "/products/jetocr", description: "Advanced OCR solutions" },
-    { name: "JetTTS", href: "/products/jettts", description: "Text-to-speech technology" },
-  ]
+  { name: "MagAI", href: "/products/magai", description: "AI-powered content management" },
+  { name: "Virtual Naani", href: "/products/virtual-naani", description: "AI grandmother for elderly care" },
+  { name: "AI Multilingual LMS", href: "/products/ai-lms", description: "Smart learning management with AI and language support" },
+  { name: "E-Library", href: "/products/elibrary", description: "Digital library for content storage and secure access" },
+  { name: "Anukaran AI", href: "/products/anukaran-ai", description: "AI model replication and training system" },
+  { name: "Sambhasini AI", href: "/products/sambhasini-ai", description: "Multilingual voice and language AI system" },
+  { name: "Multilingual Dictionary", href: "/products/multi-dictionary", description: "Language translation and speech assistance" },
+  { name: "JetPay", href: "/products/jetpay", description: "Secure UPI, fintech and payment automation" }
+];
+
 
   const serviceItems = [
     { name: "Cybersecurity", href: "/services/cybersecurity", description: "Comprehensive security solutions" },

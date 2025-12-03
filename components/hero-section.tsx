@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Shield,
@@ -40,19 +39,45 @@ import HomeServicesSection from "./home-service";
 import AdvancedProtection from "./protection-section";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { HomeSection } from "./home-section";
-import ServicesSectionFixed from "./home-service-fixed";
+// import ServicesSectionFixed from "./home-service-fixed";
+import Testimonials from "./home-testimonial";
 
 export function HeroSection() {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<any>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  
+ 
   // State for cursor position and scanning effects
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const containerRef = useRef(null);
 // const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  // State for stacked sliding texts
+  const [stackedTexts, setStackedTexts] = useState<{ id: number; text: string; delay: number }[]>([]);
+  const [marqueeTexts, setMarqueeTexts] = useState<string[]>([]);
+
+  // Split the phrase into words for stacking
+  const phraseWords = ["अनुक्षणं", "रक्षामहे"];
+
+  // Initialize stacked texts (one by one slide down)
+  useEffect(() => {
+    const newStackedTexts = phraseWords.map((word, index) => ({
+      id: index,
+      text: word,
+      delay: index * 1, // 1s delay between each
+    }));
+    setStackedTexts(newStackedTexts);
+  }, []);
+
+  // For marquee: Duplicate the full phrase for seamless loop
+  useEffect(() => {
+    const fullPhrase = "अनुक्षणं रक्षामहे ";
+    const marqueeArray = Array(10).fill(fullPhrase).flat(); // Repeat for smooth marquee
+    setMarqueeTexts(marqueeArray);
+  }, []);
+
   // Handle mouse movement for scanning effects
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -64,23 +89,19 @@ export function HeroSection() {
         });
       }
     };
-
     const handleMouseEnter = () => {
       setIsScanning(true);
     };
-
     const handleMouseLeave = () => {
       setIsScanning(false);
       setScanProgress(0);
     };
-
     const container = containerRef.current;
     if (container) {
       container.addEventListener('mousemove', handleMouseMove);
       container.addEventListener('mouseenter', handleMouseEnter);
       container.addEventListener('mouseleave', handleMouseLeave);
     }
-
     return () => {
       if (container) {
         container.removeEventListener('mousemove', handleMouseMove);
@@ -89,7 +110,6 @@ export function HeroSection() {
       }
     };
   }, []);
-
   // Simulate scanning progress
   useEffect(() => {
     let interval;
@@ -106,25 +126,19 @@ export function HeroSection() {
     } else {
       clearInterval(interval);
     }
-
     return () => clearInterval(interval);
   }, [isScanning]);
-
   return (
     <div className="relative">
       {/* Hero Section */}
       <section
         id="home"
         className="min-h-screen flex flex-col justify-center relative overflow-hidden dark:bg-gradient-to-br from-orange-500 via-black to-red-900
-        light:bg-gradient-to-br from-orange-700 via-black to-red-700"
+        light:bg-gradient-to-br "
         ref={containerRef}
       >
-
-
-
-
-         <div className="absolute inset-0   flex items-center justify-center overflow-hidden">
-                  <div className="relative w-full absolute inset-0  bg-opacity-30 filter backdrop-blur-md max-w-[90%] h-118 mt-4   border border-primary/20 rounded-lg">
+         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                  <div className="relative w-full absolute inset-0 bg-opacity-30 filter backdrop-blur-md max-w-[90%] h-118 mt-4 border border-primary/20 rounded-lg">
                     {/* Vertical Scanning Lines */}
                     <div className="absolute inset-0 hidden md:block overflow-hidden">
                       {/* Primary scanning line */}
@@ -134,7 +148,6 @@ export function HeroSection() {
                            style={{ animationDelay: '1s' }}></div>
                       <div className="absolute left-3/4 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
                            style={{ animationDelay: '2s' }}></div>
-
                       {/* Reverse scanning line */}
                       <div className="absolute right-1/4 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.5)] animate-scan-vertical-reverse"
                            style={{ animationDelay: '0.5s' }}></div>
@@ -143,7 +156,7 @@ export function HeroSection() {
                       <div className="absolute right-3/4 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.55)] animate-scan-vertical-reverse"
                            style={{ animationDelay: '2.5s' }}></div>
                     </div>
-        
+       
                     {/* Grid Pattern */}
                     <div className="absolute inset-0 opacity-20">
                       {[...Array(20)].map((_, i) => (
@@ -153,33 +166,7 @@ export function HeroSection() {
                         <div key={`v-${i}`} className="absolute top-0 bottom-0 w-px bg-primary/30" style={{left: `${i * 5}%`}}></div>
                       ))}
                     </div>
-        
-                    {/* Floating Security Icons */}
-                    {/* <div className="absolute top-8 left-8 animate-float" style={{animationDelay: '0.5s'}}>
-                      <Shield className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute top-16 right-12 animate-float" style={{animationDelay: '1s'}}>
-                      <Lock className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute bottom-20 left-16 animate-float" style={{animationDelay: '1.5s'}}>
-                      <Zap className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute bottom-8 right-8 animate-float" style={{animationDelay: '2s'}}>
-                      <Brain className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute top-1/2 left-1/4 animate-float" style={{animationDelay: '2.5s'}}>
-                      <Server className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute top-1/3 right-1/4 animate-float" style={{animationDelay: '3s'}}>
-                      <Network className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute bottom-1/3 left-1/3 animate-float" style={{animationDelay: '3.5s'}}>
-                      <Eye className="w-8 h-8 text-green-400" />
-                    </div>
-                    <div className="absolute top-1/4 right-1/3 animate-float" style={{animationDelay: '4s'}}>
-                      <Key className="w-8 h-8 text-green-400" />
-                    </div> */}
-        
+       
                     {/* Central Security Sphere */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                       <div className="relative w-32 h-32">
@@ -192,7 +179,7 @@ export function HeroSection() {
                         </div>
                       </div>
                     </div>
-        
+       
                     {/* Status Indicator */}
                     <div className="absolute bottom-4 right-42 hidden md:block border border-primary/30 rounded-lg p-2 font-mono text-xs text-primary">
                       <div className="flex items-center">
@@ -200,7 +187,6 @@ export function HeroSection() {
                         SYSTEM SECURE
                       </div>
                     </div>
-
                     {/* Threat Level */}
                     <div className="absolute bottom-4 right-4 hidden md:block border border-primary/30 rounded-lg p-2 font-mono text-xs text-primary">
                       THREAT LEVEL: <span className="text-primary">LOW</span>
@@ -218,7 +204,6 @@ export function HeroSection() {
               display: isScanning ? 'block' : 'none'
             }}
           ></div>
-
           {/* Vertical Scan Line */}
           <div
             className="absolute top-0 bottom-0 w-0.5 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] opacity-70"
@@ -228,7 +213,6 @@ export function HeroSection() {
               display: isScanning ? 'block' : 'none'
             }}
           ></div>
-
           {/* Circular Radar Pulse */}
           <div
             className="absolute rounded-full border-2 border-primary opacity-0"
@@ -241,7 +225,6 @@ export function HeroSection() {
               animation: isScanning ? 'radar-pulse 2s infinite' : 'none'
             }}
           ></div>
-
           {/* Grid Pattern */}
           <div className="absolute inset-0 opacity-20">
             {[...Array(20)].map((_, i) => (
@@ -251,24 +234,42 @@ export function HeroSection() {
               <div key={`v-${i}`} className="absolute top-0 bottom-0 w-px bg-primary/30" style={{left: `${i * 5}%`}}></div>
             ))}
           </div>
-          
-          {/* Floating Security Icons */}
-          {/* <div className="absolute top-1/4 left-1/4 animate-float" style={{animationDelay: '0.5s'}}>
-            <Shield className="w-8 h-8 text-green-400 opacity-60" />
-          </div>
-          <div className="absolute top-1/3 right-1/4 animate-float" style={{animationDelay: '1s'}}>
-            <Lock className="w-8 h-8 text-green-400 opacity-60" />
-          </div>
-          <div className="absolute bottom-1/4 left-1/3 animate-float" style={{animationDelay: '1.5s'}}>
-            <Zap className="w-8 h-8 text-green-400 opacity-60" />
-          </div>
-          <div className="absolute bottom-1/3 right-1/3 animate-float" style={{animationDelay: '2s'}}>
-            <Brain className="w-8 h-8 text-green-400 opacity-60" />
-          </div> */}
         </div>
 
+        {/* New: Stacked Slide Down Animation (One by One from Top to Bottom) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-5">
+          <div className="relative h-full w-full flex flex-col justify-center items-center">
+            {stackedTexts.map((stackedText) => (
+              <div
+                key={stackedText.id}
+                className="text-4xl md:text-6xl font-bold font-mono tracking-wide text-primary/60 animate-stack-slide-down"
+                style={{
+                  animationDelay: `${stackedText.delay}s`,
+                  animationDuration: '2s',
+                }}
+              >
+                {stackedText.text}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* New: Marquee Slide Right to Left */}
+        {/* <div className="absolute bottom-0 left-0 w-full h-20 bg-black/20 flex items-center overflow-hidden z-5">
+          <div className="flex whitespace-nowrap animate-marquee-right-to-left">
+            {marqueeTexts.map((text, index) => (
+              <span
+                key={index}
+                className="text-2xl md:text-3xl font-bold font-mono tracking-wide text-primary/50 mx-8"
+              >
+                {text}
+              </span>
+            ))}
+          </div>
+        </div> */}
+
         {/* Scanning Status Indicator */}
-        <div className="absolute bottom-4 right-4 bg-card/80 border border-primary/30 rounded-lg p-3 font-mono text-xs text-primary">
+        <div className="absolute bottom-4 right-4 bg-card/80 border border-primary/30 rounded-lg p-3 font-mono text-xs text-primary z-10">
           <div className="flex items-center mb-2">
             <div className={`w-2 h-2 rounded-full mr-2 ${isScanning ? 'bg-primary animate-pulse' : 'bg-muted-foreground'}`}></div>
             {isScanning ? 'SCANNING...' : 'SYSTEM IDLE'}
@@ -282,29 +283,23 @@ export function HeroSection() {
             </div>
           )}
         </div>
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Content */}
             <div className="space-y-6 px-4 text-center md:text-left md:space-y-6">
               <div className="space-y-4">
-                <h1 className="text-4xl text-center md:text-5xl md:text-left font-bold text-foreground">
-                  Empowering Tomorrow,{" "}
-                  <span className="text-primary">Securing Today</span>
+                <h1 className="text-5xl text-center font-extrabold md:text-5xl md:text-left text-foreground">
+                  Empowering Tomorrow,{" "} <span className="text-primary text-7xl">Securing Today</span>
+                 
                 </h1>
                 <p className="text-xl text-text max-w-2xl">
-                  {/* Innovate with Confidence in Cybersecurity and Software
-                  Excellence. At JetHat, we fuse cybersecurity, artificial
-                  intelligence, and cloud solutions to protect your growth,
-                  empowering you to innovate boldly without compromise. */}
-                  Innovate boldly with JetHat—where cybersecurity,
+                  Innovate boldly with Atche Cyber—where cybersecurity,
                    AI, and cloud solutions protect your growth and fuel software excellence.
                 </p>
                 <p className="text-lg text-primary font-semibold">
-                  <TypingAnimation text="अनुक्षणं रक्षामहे (We Protect Every Moment)" />
+                  <TypingAnimation text="   We Protect Every Moment" />
                 </p>
               </div>
-
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
@@ -323,7 +318,6 @@ export function HeroSection() {
                 </Button>
               </div>
             </div>
-
             {/* Visual Elements */}
             <div className="relative hidden md:block">
               <div className="relative w-full h-96 flex items-center justify-center">
@@ -331,17 +325,14 @@ export function HeroSection() {
                 <div className="relative w-64 h-64">
                   {/* Outer Ring */}
                   <div className="absolute inset-0 border-4 border-primary/30 rounded-full animate-spin-slow"></div>
-
                   {/* Middle Ring */}
                   <div className="absolute inset-8 border-4 border-primary/50 rounded-full animate-spin-slow-reverse"></div>
-
                   {/* Inner Core */}
                   <div className="absolute inset-16 bg-primary/10 rounded-full flex items-center justify-center">
                     <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
                       <Shield className="w-8 h-8 text-primary" />
                     </div>
                   </div>
-
                   {/* Orbiting Elements */}
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-orbit">
                     <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
@@ -368,7 +359,6 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-
         <style jsx>{`
           @keyframes radar-pulse {
             0% {
@@ -410,8 +400,6 @@ export function HeroSection() {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
           }
-
-
           @keyframes scan-vertical {
             0% {
               top: -10%;
@@ -428,18 +416,6 @@ export function HeroSection() {
               bottom: 110%;
             }
           }
-          @keyframes spin-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-          @keyframes spin-slow-reverse {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
-          }
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-          }
           .animate-scan-vertical {
             animation: scan-vertical 3s linear infinite;
           }
@@ -455,12 +431,6 @@ export function HeroSection() {
           .animate-float {
             animation: float 6s ease-in-out infinite;
           }
-          .animate-spin-slow {
-            animation: spin-slow 15s linear infinite;
-          }
-          .animate-spin-slow-reverse {
-            animation: spin-slow-reverse 12s linear infinite;
-          }
           .animate-orbit {
             animation: orbit 8s linear infinite;
           }
@@ -473,29 +443,45 @@ export function HeroSection() {
           .animate-orbit-delayed-reverse {
             animation: orbit-delayed-reverse 14s linear infinite;
           }
-          .animate-float {
-            animation: float 6s ease-in-out infinite;
+          /* New: Stack Slide Down Animation */
+          @keyframes stack-slide-down {
+            0% {
+              opacity: 0;
+              transform: translateY(-100px) scale(0.8);
+            }
+            100% {
+              opacity: 0.6;
+              transform: translateY(0) scale(1);
+            }
           }
-
+          .animate-stack-slide-down {
+            animation: stack-slide-down ease-out forwards;
+          }
+          /* New: Marquee Right to Left */
+          @keyframes marquee-right-to-left {
+            0% {
+              transform: translateX(100%);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
+          }
+          .animate-marquee-right-to-left {
+            animation: marquee-right-to-left 20s linear infinite;
+          }
         `}</style>
       </section>
-
           <HomeProductsSection />
-
       {/* <HomeSection/> */}
       <HomeServicesSection />
-  
-
+ 
       <IndustriesSection />
-
-    
+   
       {/* Who We Are Section */}
       <WhoWeAreSection />
-
       {/* Enhanced Advanced Protection Section with Animated Threads */}
       <AdvancedProtection />
-
-      <section id="clients" className="py-16 bg-background">
+  <section id="clients" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Trusted by Industry Leaders
@@ -513,6 +499,7 @@ export function HeroSection() {
                 { name: "Retail Enterprises", logo: "/logo2.png" },
                 { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
                 { name: "Education Systems", logo: "/placeholder-logo.svg" },
+                { name: "Atche Cyber", logo: "/atche-cyber-logo.png" }, // Added Atche Cyber as a client example
                 // Duplicate for seamless loop
                 { name: "Tech Innovations Inc.", logo: "/image-1.png" },
                 { name: "Global Banking Corp", logo: "/image-2.png" },
@@ -520,6 +507,7 @@ export function HeroSection() {
                 { name: "Retail Enterprises", logo: "/logo2.png" },
                 { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
                 { name: "Education Systems", logo: "/placeholder-logo.svg" },
+                { name: "Atche Cyber", logo: "/atche-cyber-logo.png" }, // Duplicate for loop
               ].map((client, index) => (
                 <div
                   key={index}
@@ -555,9 +543,9 @@ export function HeroSection() {
           }
         `}</style>
       </section>
-
+   
       {/* Stay Updated Section */}
-      <section id="stay-updated" className="py-16 bg-muted">
+      {/* <section id="stay-updated" className="py-16 bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Stay Updated</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
@@ -569,7 +557,7 @@ export function HeroSection() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 p-3 rounded-l-lg border border-primary/20   focus:ring-primary"
+                className="flex-1 p-3 rounded-l-lg border border-primary/20 focus:ring-primary"
               />
               <Button className="bg-primary hover:bg-secondary h-14 text-primary-foreground rounded-l-none">
                 Subscribe
@@ -580,8 +568,14 @@ export function HeroSection() {
             We respect your privacy. You can unsubscribe at any time.
           </p>
         </div>
-      </section>
-      {/* Call to Action Section */}
+      </section> */}
+      {/* testimonial */}
+<section>
+ 
+ 
+  <Testimonials />
+  </section>
+        {/* Call to Action Section */}
       <section id="cta" className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
@@ -600,14 +594,14 @@ export function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-background text-background hover:bg-background hover:text-primary"
+              className="border-background text-background hover:bg-background text-black hover:text-primary"
             >
               Explore Services
             </Button>
           </div>
         </div>
       </section>
-
+     
       {/* Service Detail Modal */}
       <Modal
         isOpen={!!selectedService}
@@ -652,7 +646,6 @@ export function HeroSection() {
           </div>
         )}
       </Modal>
-
       {/* Contact Modal */}
       <Modal
         isOpen={isContactModalOpen}

@@ -54,11 +54,11 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="py-20 bg-muted/50">
+    <section className="py-16 bg-gray-100 dark:bg-secondary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-balance">What Our Clients Say</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">What Our Clients Say</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Don't just take our word for it. Here's what industry leaders have to say about working with JetHat.
           </p>
         </div>
@@ -71,14 +71,14 @@ export function TestimonialsSection() {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-full transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-[#FF8C00] hover:bg-[#FFB300] text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-full transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-[#FF8C00] hover:bg-[#FFB300] text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-6 h-6" />
@@ -93,16 +93,16 @@ export function TestimonialsSection() {
               exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              <Card className="group hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 max-h-64">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-1 mb-4">
+              <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-[#FF8C00]/20 dark:border-[#FF8C00]/30 hover:border-[#FF8C00]/40 bg-white dark:bg-gray-900/95">
+                <CardContent className="p-8">
+                  <div className="flex items-center space-x-1 mb-6">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="w-5 h-5 fill-[#FFB300] text-[#FFB300]" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4 italic text-sm">"{testimonials[currentIndex].content}"</p>
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 italic text-lg leading-relaxed">"{testimonials[currentIndex].content}"</p>
                   <div className="flex items-center space-x-4">
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-[#FF8C00]/30">
                       <Image
                         src={testimonials[currentIndex].image}
                         alt={testimonials[currentIndex].name}
@@ -111,8 +111,8 @@ export function TestimonialsSection() {
                       />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm">{testimonials[currentIndex].name}</h4>
-                      <p className="text-xs text-muted-foreground">{testimonials[currentIndex].role}</p>
+                      <h4 className="font-semibold text-base text-gray-900 dark:text-white">{testimonials[currentIndex].name}</h4>
+                      <p className="text-sm text-[#FF8C00] font-medium">{testimonials[currentIndex].role}</p>
                     </div>
                   </div>
                 </CardContent>
