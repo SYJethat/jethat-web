@@ -35,6 +35,7 @@ import { TestimonialsSection } from "./testimonials-section";
 import { AnimatedStats } from "./animated-stats";
 import BGImage from "../public/cybersecurity-concept-collage-design.jpg";
 import Image from "next/image";
+import HomeProductsSection from "./home-products";
 import HomeServicesSection from "./home-service";
 import AdvancedProtection from "./protection-section";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
@@ -478,6 +479,8 @@ export function HeroSection() {
 
         `}</style>
       </section>
+
+          <HomeProductsSection />
 
       {/* <HomeSection/> */}
       <HomeServicesSection />
