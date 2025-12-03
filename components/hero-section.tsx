@@ -37,10 +37,12 @@ import Image from "next/image";
 import HomeProductsSection from "./home-products";
 import HomeServicesSection from "./home-service";
 import AdvancedProtection from "./protection-section";
+import RegistrationSection from "./registration-section";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { HomeSection } from "./home-section";
 // import ServicesSectionFixed from "./home-service-fixed";
 import Testimonials from "./home-testimonial";
+import Client from "./clients-marquee"
 
 export function HeroSection() {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
@@ -471,17 +473,22 @@ export function HeroSection() {
           }
         `}</style>
       </section>
-          <HomeProductsSection />
+       <IndustriesSection />
+        
       {/* <HomeSection/> */}
-      <HomeServicesSection />
- 
-      <IndustriesSection />
+      {/* <HomeServicesSection /> */}
+   <HomeProductsSection />
+      {/* <IndustriesSection /> */}
    
       {/* Who We Are Section */}
       <WhoWeAreSection />
       {/* Enhanced Advanced Protection Section with Animated Threads */}
       <AdvancedProtection />
-  <section id="clients" className="py-16 bg-background">
+
+      {/* Registration Section */}
+      
+
+  {/* <section id="clients" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Trusted by Industry Leaders
@@ -542,7 +549,11 @@ export function HeroSection() {
             animation-play-state: paused;
           }
         `}</style>
-      </section>
+      </section> */}
+
+      <Client/>
+
+      <RegistrationSection />
    
       {/* Stay Updated Section */}
       {/* <section id="stay-updated" className="py-16 bg-muted">
@@ -594,7 +605,7 @@ export function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-background text-background hover:bg-background text-black hover:text-primary"
+              className="border-background hover:bg-background text-black hover:text-primary"
             >
               Explore Services
             </Button>

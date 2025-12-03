@@ -78,17 +78,17 @@ export function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+    <nav className="fixed top-0 w-full h-28 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <img src={Logo.src} alt="JetHat Logo" className="h-8 w-auto" />
-            <span className="text-xl font-bold text-foreground">JetHat</span>
+            <img src={Logo.src} alt="JetHat Logo" className="h-20 w-auto mt-10" />
+            {/* <span className="text-xl font-bold text-foreground">JetHat Cyber Security</span> */}
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden mt-10 text-4xl md:flex items-center space-x-4">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -172,7 +172,7 @@ export function Navigation() {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:flex">
+          <div className="hidden mt-12 md:flex">
             <Button className="bg-primary hover:bg-secondary text-primary-foreground">Talk To Us</Button>
           </div>
 
