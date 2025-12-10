@@ -42,19 +42,20 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { HomeSection } from "./home-section";
 // import ServicesSectionFixed from "./home-service-fixed";
 import Testimonials from "./home-testimonial";
-import Client from "./clients-marquee"
+import Client from "./clients-marquee";
+import { VideoBackground } from "./video-background";
 
 export function HeroSection() {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<any>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
- 
+
   // State for cursor position and scanning effects
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const containerRef = useRef(null);
-// const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  // const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // State for stacked sliding texts
   const [stackedTexts, setStackedTexts] = useState<{ id: number; text: string; delay: number }[]>([]);
@@ -135,66 +136,68 @@ export function HeroSection() {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex flex-col justify-center relative overflow-hidden dark:bg-gradient-to-br from-orange-500 via-black to-red-900
-        light:bg-gradient-to-br "
+        className="min-h-screen flex flex-col justify-center relative overflow-hidden"
         ref={containerRef}
       >
-         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                  <div className="relative w-full absolute inset-0 bg-opacity-30 filter backdrop-blur-md max-w-[90%] h-118 mt-4 border border-primary/20 rounded-lg">
-                    {/* Vertical Scanning Lines */}
-                    <div className="absolute inset-0 hidden md:block overflow-hidden">
-                      {/* Primary scanning line */}
-                      <div className="absolute left-1/4 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
-                           style={{ animationDelay: '0s' }}></div>
-                      <div className="absolute left-1/2 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
-                           style={{ animationDelay: '1s' }}></div>
-                      <div className="absolute left-3/4 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
-                           style={{ animationDelay: '2s' }}></div>
-                      {/* Reverse scanning line */}
-                      <div className="absolute right-1/4 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.5)] animate-scan-vertical-reverse"
-                           style={{ animationDelay: '0.5s' }}></div>
-                      <div className="absolute right-1/2 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.5)] animate-scan-vertical-reverse"
-                           style={{ animationDelay: '1.5s' }}></div>
-                      <div className="absolute right-3/4 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.55)] animate-scan-vertical-reverse"
-                           style={{ animationDelay: '2.5s' }}></div>
-                    </div>
-       
-                    {/* Grid Pattern */}
-                    <div className="absolute inset-0 opacity-20">
-                      {[...Array(20)].map((_, i) => (
-                        <div key={`h-${i}`} className="absolute left-0 right-0 h-px bg-primary/30" style={{top: `${i * 5}%`}}></div>
-                      ))}
-                      {[...Array(20)].map((_, i) => (
-                        <div key={`v-${i}`} className="absolute top-0 bottom-0 w-px bg-primary/30" style={{left: `${i * 5}%`}}></div>
-                      ))}
-                    </div>
-       
-                    {/* Central Security Sphere */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="relative w-32 h-32">
-                        <div className="absolute inset-0 border-4 border-primary/30 rounded-full animate-spin-slow"></div>
-                        <div className="absolute inset-6 border-4 border-primary/50 rounded-full animate-spin-slow-reverse"></div>
-                        <div className="absolute inset-12 bg-primary/10 rounded-full flex items-center justify-center">
-                          <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                            <Shield className="w-8 h-8 text-primary" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-       
-                    {/* Status Indicator */}
-                    <div className="absolute bottom-4 right-42 hidden md:block border border-primary/30 rounded-lg p-2 font-mono text-xs text-primary">
-                      <div className="flex items-center">
-                        <div className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></div>
-                        SYSTEM SECURE
-                      </div>
-                    </div>
-                    {/* Threat Level */}
-                    <div className="absolute bottom-4 right-4 hidden md:block border border-primary/30 rounded-lg p-2 font-mono text-xs text-primary">
-                      THREAT LEVEL: <span className="text-primary">LOW</span>
-                    </div>
+        {/* Video Background */}
+        <VideoBackground />
+
+        <div className="absolute   inset-0 flex items-center justify-center overflow-hidden">
+          <div className="relative w-full  inset-0 bg-opacity-30 filter backdrop-blur-xs max-w-[90%]  h-118 mt-4 border border-primary/20 rounded-lg">
+            {/* Vertical Scanning Lines */}
+            <div className="absolute inset-0 hidden md:block overflow-hidden">
+              {/* Primary scanning line */}
+              <div className="absolute left-1/4 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
+                style={{ animationDelay: '0s' }}></div>
+              <div className="absolute left-1/2 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
+                style={{ animationDelay: '1s' }}></div>
+              <div className="absolute left-3/4 w-0.5 h-20 bg-primary shadow-[0_0_15px_5px_rgba(255, 165, 0, 1.0)] animate-scan-vertical"
+                style={{ animationDelay: '2s' }}></div>
+              {/* Reverse scanning line */}
+              <div className="absolute right-1/4 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.5)] animate-scan-vertical-reverse"
+                style={{ animationDelay: '0.5s' }}></div>
+              <div className="absolute right-1/2 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.5)] animate-scan-vertical-reverse"
+                style={{ animationDelay: '1.5s' }}></div>
+              <div className="absolute right-3/4 w-0.5 h-20 bg-accent shadow-[0_0_15px_5px_rgba(255, 0, 0, 0.55)] animate-scan-vertical-reverse"
+                style={{ animationDelay: '2.5s' }}></div>
+            </div>
+
+            {/* Grid Pattern */}
+            <div className="absolute inset-0 opacity-20">
+              {[...Array(20)].map((_, i) => (
+                <div key={`h-${i}`} className="absolute left-0 right-0 h-px bg-primary/30" style={{ top: `${i * 5}%` }}></div>
+              ))}
+              {[...Array(20)].map((_, i) => (
+                <div key={`v-${i}`} className="absolute top-0 bottom-0 w-px bg-primary/30" style={{ left: `${i * 5}%` }}></div>
+              ))}
+            </div>
+
+            {/* Central Security Sphere */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative w-32 h-32">
+                <div className="absolute inset-0 border-4 border-primary/30 rounded-full animate-spin-slow"></div>
+                <div className="absolute inset-6 border-4 border-primary/50 rounded-full animate-spin-slow-reverse"></div>
+                <div className="absolute inset-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                    <Shield className="w-8 h-8 text-primary" />
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Status Indicator */}
+            <div className="absolute bottom-4 right-42 hidden md:block border border-primary/30 rounded-lg p-2 font-mono text-xs text-primary">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></div>
+                SYSTEM SECURE
+              </div>
+            </div>
+            {/* Threat Level */}
+            <div className="absolute bottom-4 right-4 hidden md:block border border-primary/30 rounded-lg p-2 font-mono text-xs text-primary">
+              THREAT LEVEL: <span className="text-primary">LOW</span>
+            </div>
+          </div>
+        </div>
         {/* Animated Scanning Effects */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Horizontal Scan Line */}
@@ -230,16 +233,16 @@ export function HeroSection() {
           {/* Grid Pattern */}
           <div className="absolute inset-0 opacity-20">
             {[...Array(20)].map((_, i) => (
-              <div key={`h-${i}`} className="absolute left-0 right-0 h-px bg-primary/30" style={{top: `${i * 5}%`}}></div>
+              <div key={`h-${i}`} className="absolute left-0 right-0 h-px bg-primary/30" style={{ top: `${i * 5}%` }}></div>
             ))}
             {[...Array(20)].map((_, i) => (
-              <div key={`v-${i}`} className="absolute top-0 bottom-0 w-px bg-primary/30" style={{left: `${i * 5}%`}}></div>
+              <div key={`v-${i}`} className="absolute top-0 bottom-0 w-px bg-primary/30" style={{ left: `${i * 5}%` }}></div>
             ))}
           </div>
         </div>
 
         {/* New: Stacked Slide Down Animation (One by One from Top to Bottom) */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-5">
+        {/* <div className="absolute inset-0 pointer-events-none overflow-hidden z-5">
           <div className="relative h-full w-full flex flex-col justify-center items-center">
             {stackedTexts.map((stackedText) => (
               <div
@@ -254,7 +257,7 @@ export function HeroSection() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* New: Marquee Slide Right to Left */}
         {/* <div className="absolute bottom-0 left-0 w-full h-20 bg-black/20 flex items-center overflow-hidden z-5">
@@ -271,7 +274,7 @@ export function HeroSection() {
         </div> */}
 
         {/* Scanning Status Indicator */}
-        <div className="absolute bottom-4 right-4 bg-card/80 border border-primary/30 rounded-lg p-3 font-mono text-xs text-primary z-10">
+        <div className="absolute bottom-4 right-4 bg-card/80 border border-primary/30  rounded-lg p-3 font-mono text-xs text-primary z-10">
           <div className="flex items-center mb-2">
             <div className={`w-2 h-2 rounded-full mr-2 ${isScanning ? 'bg-primary animate-pulse' : 'bg-muted-foreground'}`}></div>
             {isScanning ? 'SCANNING...' : 'SYSTEM IDLE'}
@@ -280,23 +283,23 @@ export function HeroSection() {
             <div className="w-full bg-muted rounded-full h-1 mt-1">
               <div
                 className="bg-primary h-1 rounded-full transition-all duration-300"
-                style={{width: `${scanProgress}%`}}
+                style={{ width: `${scanProgress}%` }}
               ></div>
             </div>
           )}
         </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="container  mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1  md:grid-cols-2  gap-8 md:gap-12 items-center">
             {/* Content */}
-            <div className="space-y-6 px-4 text-center md:text-left md:space-y-6">
+            <div className="space-y-6 px-4 ml-[10%] text-center md:text-left md:space-y-6">
               <div className="space-y-4">
                 <h1 className="text-5xl text-center font-extrabold md:text-5xl md:text-left text-foreground">
                   Empowering Tomorrow,{" "} <span className="text-primary text-7xl">Securing Today</span>
-                 
+
                 </h1>
                 <p className="text-xl text-text max-w-2xl">
                   Innovate boldly with Atche Cyber—where cybersecurity,
-                   AI, and cloud solutions protect your growth and fuel software excellence.
+                  AI, and cloud solutions protect your growth and fuel software excellence.
                 </p>
                 <p className="text-lg text-primary font-semibold">
                   <TypingAnimation text="   We Protect Every Moment" />
@@ -330,30 +333,67 @@ export function HeroSection() {
                   {/* Middle Ring */}
                   <div className="absolute inset-8 border-4 border-primary/50 rounded-full animate-spin-slow-reverse"></div>
                   {/* Inner Core */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden z-5">
+                    <div className="relative h-full w-full flex flex-col justify-center items-center">
+                      {stackedTexts.map((stackedText) => (
+                        <div
+                          key={stackedText.id}
+                          className="text-2xl md:text-6xl font-bold font-mono tracking-wide text-primary/60 animate-stack-slide-down"
+                          style={{
+                            animationDelay: `${stackedText.delay}s`,
+                            animationDuration: '2s',
+                          }}
+                        >
+                          {stackedText.text}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   <div className="absolute inset-16 bg-primary/10 rounded-full flex items-center justify-center">
                     <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
                       <Shield className="w-8 h-8 text-primary" />
+                      {/* <h1>अनुक्षणं रक्षामहे </h1> */}
                     </div>
                   </div>
                   {/* Orbiting Elements */}
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-orbit">
                     <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                      <Lock className="w-4 h-4 text-primary" />
+                      <Lock className="w-4 h-4 text-primary" />  अनुक्षणं
                     </div>
                   </div>
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 animate-orbit-reverse">
                     <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-primary" />
+                      <Zap className="w-4 h-4 text-primary" />  रक्षामहे
                     </div>
                   </div>
                   <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 animate-orbit-delayed">
                     <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                      <Brain className="w-4 h-4 text-primary" />
+                      <Brain className="w-4 h-4 text-primary" /> अनुक्षणं
                     </div>
                   </div>
                   <div className="absolute top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2 animate-orbit-delayed-reverse">
                     <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                      <Cpu className="w-4 h-4 text-primary" />
+                      <Cpu className="w-4 h-4 text-primary" />  रक्षामहे
+                    </div>
+                  </div>
+                  <div className="absolute top-0 left-1/4 transform -translate-x-1/4 -translate-y-1/4 animate-orbit">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                      <Lock className="w-4 h-4 text-primary" />  अनुक्षणं
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-1/3 transform -translate-x-1/3 translate-y-1/3 animate-orbit-reverse">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                      <Zap className="w-4 h-4 text-primary" />  रक्षामहे
+                    </div>
+                  </div>
+                  <div className="absolute top-1/7 right-1/8 transform translate-x-1/1 -translate-y-1/1 animate-orbit-delayed">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                      <Brain className="w-4 h-4 text-primary" /> अनुक्षणं
+                    </div>
+                  </div>
+                  <div className="absolute top-1/8 left-5 transform -translate-x-1/5 -translate-y-1/5 animate-orbit-delayed-reverse">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                      <Cpu className="w-4 h-4 text-primary" />  रक्षामहे
                     </div>
                   </div>
                 </div>
@@ -473,22 +513,22 @@ export function HeroSection() {
           }
         `}</style>
       </section>
-       <IndustriesSection />
-        
+      <IndustriesSection />
+
       {/* <HomeSection/> */}
       {/* <HomeServicesSection /> */}
-   <HomeProductsSection />
+      <HomeProductsSection />
       {/* <IndustriesSection /> */}
-   
+
       {/* Who We Are Section */}
       <WhoWeAreSection />
       {/* Enhanced Advanced Protection Section with Animated Threads */}
       <AdvancedProtection />
 
       {/* Registration Section */}
-      
 
-  {/* <section id="clients" className="py-16 bg-background">
+
+      {/* <section id="clients" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
             Trusted by Industry Leaders
@@ -551,10 +591,10 @@ export function HeroSection() {
         `}</style>
       </section> */}
 
-      <Client/>
+      <Client />
 
       <RegistrationSection />
-   
+
       {/* Stay Updated Section */}
       {/* <section id="stay-updated" className="py-16 bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -581,12 +621,12 @@ export function HeroSection() {
         </div>
       </section> */}
       {/* testimonial */}
-<section>
- 
- 
-  <Testimonials />
-  </section>
-        {/* Call to Action Section */}
+      <section>
+
+
+        <Testimonials />
+      </section>
+      {/* Call to Action Section */}
       <section id="cta" className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
@@ -612,7 +652,7 @@ export function HeroSection() {
           </div>
         </div>
       </section>
-     
+
       {/* Service Detail Modal */}
       <Modal
         isOpen={!!selectedService}

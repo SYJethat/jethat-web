@@ -124,6 +124,15 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Optimize video performance */
+  video {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
 }
 
 /* Added custom animations for interactive elements */
