@@ -57,7 +57,7 @@ export function VideoBackground() {
           willChange: "transform", // Optimize for smooth playback
         }}
       >
-        <source src="/jet_video_6.mp4" type="video/mp4" />
+        <source src="/public/jet_video_6.mp4" type="video/mp4" />
       </video>
       
       {/* Dark overlay for better text readability */}
