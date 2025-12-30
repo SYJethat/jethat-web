@@ -44,6 +44,14 @@ import { HomeSection } from "./home-section";
 import Testimonials from "./home-testimonial";
 import Client from "./clients-marquee";
 import { VideoBackground } from "./video-background";
+import ClientsSection from "./clients-section";
+import ImageAdSection from "./image-ad-section";
+import CybersecurityAdPage from "./image-ad-section";
+import ClientsMarqueeSection from "./clients-marquee";
+
+
+import Logo from "../public/20635.jpg"
+import CareerOpportunityAd from "./career-opportunity-ad";
 
 export function HeroSection() {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
@@ -287,17 +295,32 @@ export function HeroSection() {
               ></div>
             </div>
           )}
+
+          
+
+
         </div>
+        {/* <div className= "relative left-[12%] top-[60vh] z-50">
+        <div className="flex items-center space-x-4   ">
+          <img src={Logo.src} alt="Company Logo" className="h-8 w-auto" />
+          <div className="flex items-center space-x-3">
+            <img src="/iso-27001.png" alt="ISO 27001 Certified" className="h-16 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+            <img src="/iso-9001.png" alt="ISO 9001 Certified" className="h-16 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+            <img src="/msme.png" alt="MSME Registered" className="h-16 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          </div>
+        </div>
+      </div> */}
+        
         <div className="container  mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1  md:grid-cols-2  gap-8 md:gap-12 items-center">
             {/* Content */}
             <div className="space-y-6 px-4 ml-[10%] text-center md:text-left md:space-y-6">
               <div className="space-y-4">
-                <h1 className="text-5xl text-center font-extrabold md:text-5xl md:text-left text-foreground">
+                <h1 className="text-5xl text-center font-extrabold  md:text-5xl md:text-left text-white">
                   Empowering Tomorrow,{" "} <span className="text-primary text-7xl">Securing Today</span>
 
                 </h1>
-                <p className="text-xl text-text max-w-2xl">
+                <p className="text-xl text-white max-w-2xl">
                   Innovate boldly with Atche Cyber—where cybersecurity,
                   AI, and cloud solutions protect your growth and fuel software excellence.
                 </p>
@@ -400,7 +423,11 @@ export function HeroSection() {
               </div>
             </div>
           </div>
+
+
+        
         </div>
+    
         <style jsx>{`
           @keyframes radar-pulse {
             0% {
@@ -512,122 +539,38 @@ export function HeroSection() {
             animation: marquee-right-to-left 20s linear infinite;
           }
         `}</style>
+
       </section>
+
+      {/* Certification Images - Fixed at bottom of screen */}
+      
+
+    
+    
+      <ClientsSection/>
+
+      <CybersecurityAdPage/>
+            {/* <HomeProductsSection /> */}
+      
+
       <IndustriesSection />
-
-      {/* <HomeSection/> */}
-      {/* <HomeServicesSection /> */}
-      <HomeProductsSection />
-      {/* <IndustriesSection /> */}
-
-      {/* Who We Are Section */}
+      <HomeServicesSection />
       <WhoWeAreSection />
-      {/* Enhanced Advanced Protection Section with Animated Threads */}
+    
       <AdvancedProtection />
-
-      {/* Registration Section */}
-
-
-      {/* <section id="clients" className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Trusted by Industry Leaders
-          </h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-            We provide cybersecurity solutions to organizations across various
-            industries.
-          </p>
-          <div className="overflow-hidden">
-            <div className="flex animate-marquee [--marquee-speed:20s] hover:pause-marquee">
-              {[
-                { name: "Tech Innovations Inc.", logo: "/image-1.png" },
-                { name: "Global Banking Corp", logo: "/image-2.png" },
-                { name: "Healthcare Solutions", logo: "/image-3.svg" },
-                { name: "Retail Enterprises", logo: "/logo2.png" },
-                { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
-                { name: "Education Systems", logo: "/placeholder-logo.svg" },
-                { name: "Atche Cyber", logo: "/atche-cyber-logo.png" }, // Added Atche Cyber as a client example
-                // Duplicate for seamless loop
-                { name: "Tech Innovations Inc.", logo: "/image-1.png" },
-                { name: "Global Banking Corp", logo: "/image-2.png" },
-                { name: "Healthcare Solutions", logo: "/image-3.svg" },
-                { name: "Retail Enterprises", logo: "/logo2.png" },
-                { name: "Manufacturing Group", logo: "/placeholder-logo.png" },
-                { name: "Education Systems", logo: "/placeholder-logo.svg" },
-                { name: "Atche Cyber", logo: "/atche-cyber-logo.png" }, // Duplicate for loop
-              ].map((client, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 bg-card p-4 rounded-lg flex items-center justify-center border border-primary/20 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 mx-2"
-                >
-                  <Image
-                    src={client.logo}
-                    alt={client.name}
-                    width={64}
-                    height={64}
-                    className="w-16 h-16 object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <style jsx>{`
-          .animate-marquee {
-            display: flex;
-            animation: marquee var(--marquee-speed) linear infinite;
-          }
-          @keyframes marquee {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          .pause-marquee:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
-      </section> */}
-
-      <Client />
-
-      <RegistrationSection />
-
-      {/* Stay Updated Section */}
-      {/* <section id="stay-updated" className="py-16 bg-muted">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Stay Updated</h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Subscribe to our newsletter for the latest cybersecurity insights,
-            trends, and updates.
-          </p>
-          <div className="flex justify-center max-w-md mx-auto">
-            <div className="flex w-full">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 p-3 rounded-l-lg border border-primary/20 focus:ring-primary"
-              />
-              <Button className="bg-primary hover:bg-secondary h-14 text-primary-foreground rounded-l-none">
-                Subscribe
-              </Button>
-            </div>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">
-            We respect your privacy. You can unsubscribe at any time.
-          </p>
-        </div>
-      </section> */}
+     
       {/* testimonial */}
       <section>
-
-
         <Testimonials />
       </section>
-      {/* Call to Action Section */}
-      <section id="cta" className="py-16 bg-primary text-primary-foreground">
+           {/* <ClientsMarqueeSection /> */}
+           <CareerOpportunityAd />
+            <RegistrationSection />
+
+<div className=" bg-gradient-to-br from-orange-50 via-white to-amber-50 dark:from-orange-600 dark:via-orange-950 dark:to-black">
+            
+             {/* Call to Action Section */}
+      <section id="cta" className="py-16 text-black dark:text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
             Ready to Secure Your Digital Future?
@@ -652,6 +595,43 @@ export function HeroSection() {
           </div>
         </div>
       </section>
+            {/* Stay Updated Section */}
+      <section id="stay-updated" className="py-16   ">
+        <div>
+
+          
+        </div>
+        <div className="container  justify-center flex flex-row mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex flex-col text-left">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">Stay Updated</h2> 
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            Subscribe to our newsletter for the latest cybersecurity insights,
+            trends, and updates.
+          </p>
+          </div>
+          <div className="">
+          <div className="flex  flex-row justify-end max-w-md mx-auto">
+            <div className="flex w-full">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 p-3 text-right rounded-l-lg border border-primary/20 focus:ring-primary"
+              />
+              <Button className="bg-primary hover:bg-secondary h-14 text-primary-foreground rounded-l-none">
+                Subscribe
+              </Button>
+            </div>
+          </div>
+          <p className="text-sm text-muted-foreground mt-4">
+            We respect your privacy. You can unsubscribe at any time.
+          </p>
+          </div>
+        </div>
+       
+      </section>
+       <div className="border-1 border-white"></div>
+     
+      </div>
 
       {/* Service Detail Modal */}
       <Modal

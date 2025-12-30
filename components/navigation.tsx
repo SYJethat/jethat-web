@@ -13,7 +13,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { Menu, Shield, Sun, Moon, Plus, Minus } from "lucide-react"
+import { Menu, Shield, Sun, Moon, Plus, Minus, X, Phone, Mail, Facebook, Instagram, Twitter, Dribbble, Network, Brain } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
@@ -21,6 +21,7 @@ import { useState, useEffect } from "react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isRightPanelOpen, setIsRightPanelOpen] = useState(false)
   // const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -171,9 +172,23 @@ export function Navigation() {
 
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden mt-12 md:flex">
-            <Button className="bg-primary hover:bg-secondary text-primary-foreground">Talk To Us</Button>
+          {/* CTA Button and Right Panel Trigger */}
+          <div className="hidden mt-12 md:flex items-center space-x-4">
+           
+            <Button 
+              className="bg-primary hover:bg-secondary text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              Talk To Us
+            </Button>
+
+             <Button 
+              variant="outline" 
+              onClick={() => setIsRightPanelOpen(true)}
+              className="border-primary/30 text-primary hover:bg-primary/10 hover:text-primary bg-transparent backdrop-blur-sm transition-all duration-300"
+            >
+              <Menu className="h-4 w-4 mr-2" />
+            
+            </Button>
           </div>
 
           {/* Mobile Menu */}
@@ -317,6 +332,158 @@ export function Navigation() {
                 </Link>
 
                 <Button className=" ml-8 mr-6 bg-transparent hover:bg-transparent text-foreground mt-2  item-center justify-center">Talk To Us</Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+
+          {/* Right Slide Panel */}
+          <Sheet open={isRightPanelOpen} onOpenChange={setIsRightPanelOpen}>
+            <SheetContent side="right" className="w-[450px] sm:w-[500px] overflow-y-auto bg-card/95 backdrop-blur-xl border-l border-primary/20 shadow-2xl">
+              <div className="flex flex-col h-full p-6 space-y-8">
+                {/* Header Section */}
+                <div className="text-center space-y-4">
+                  <div className="relative">
+                    <h1 className="text-2xl font-bold text-foreground mb-4 animate-fade-in">
+                     Scalable Business for Startups
+                    </h1>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg blur opacity-75"></div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed text-md animate-fade-in" style={{animationDelay: '0.2s'}}>
+                   At Jethat, we turn ideas into fast, scalable execution that drives real growth.
+                  </p>
+                </div>
+
+                {/* Decorative Divider */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-primary/30"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <div className="bg-card px-4">
+                      <Shield className="h-6 w-6 text-primary" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Social Media Section */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-foreground text-center flex items-center justify-center">
+                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                      Follow Us
+                    </span>
+                  </h3>
+                  <div className="flex justify-center space-x-6">
+                    <a 
+                      href="#" 
+                      className="group relative p-4 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="h-4 w-4 text-primary group-hover:text-primary transition-colors" />
+                      <div className="absolute inset-0 rounded-full bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                    </a>
+                    <a 
+                      href="#" 
+                      className="group relative p-4 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                      aria-label="Instagram"
+                    >
+                      <Instagram className="h-4 w-4 text-primary group-hover:text-primary transition-colors" />
+                      <div className="absolute inset-0 rounded-full bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                    </a>
+                    <a 
+                      href="#" 
+                      className="group relative p-4 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                      aria-label="Twitter"
+                    >
+                      <Twitter className="h-4 w-4 text-primary group-hover:text-primary transition-colors" />
+                      <div className="absolute inset-0 rounded-full bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                    </a>
+                    <a 
+                      href="#" 
+                      className="group relative p-4 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                      aria-label="Dribbble"
+                    >
+                      <Dribbble className="h-4 w-4 text-primary group-hover:text-primary transition-colors" />
+                      <div className="absolute inset-0 rounded-full bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Decorative Divider */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-primary/30"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <div className="bg-card px-4">
+                      <Network className="h-6 w-6 text-primary" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact Information */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-foreground text-center flex items-center justify-center">
+                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                      Contact Info
+                    </span>
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-2 p-2 rounded-lg bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors duration-300">
+                      <div className="p-2 rounded-full bg-primary/20">
+                        <Phone className="h-4 w-4 text-primary" />
+                      </div>
+                      <span className="text-foreground text-sm font-medium">+91-120-4188947
+</span>
+                    </div>
+                    <div className="flex items-center space-x-2 p-2 rounded-lg bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors duration-300">
+                      <div className="p-2 rounded-full bg-primary/20">
+                        <Mail className="h-5 w-5 text-primary" />
+                      </div>
+                      <span className="text-foreground text-sm font-medium">info@jethat.in</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Decorative Divider */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-primary/30"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <div className="bg-card px-4">
+                      <Brain className="h-6 w-6 text-primary" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Collaboration Message */}
+                <div className="relative">
+                  <div className="p-4 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl border border-primary/20 shadow-lg backdrop-blur-sm">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl"></div>
+                    <p className="text-foreground font-semibold text-center text-sm relative z-10">
+                      Looking for collaboration for your next creative project?
+                    </p>
+                    <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-60"></div>
+                    <div className="absolute -top-2 -left-2 w-3 h-3 bg-secondary rounded-full opacity-60"></div>
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <div className="mt-auto space-y-4">
+                  <Button 
+                    onClick={() => setIsRightPanelOpen(false)}
+                    className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-lg font-semibold py-6"
+                  >
+                    Get In Touch
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    onClick={() => setIsRightPanelOpen(false)}
+                    className="w-full border-primary/30 text-primary hover:bg-primary/10 hover:text-primary transition-all duration-300"
+                  >
+                    Close Panel
+                  </Button>
+                </div>
               </div>
             </SheetContent>
           </Sheet>

@@ -1,9 +1,22 @@
+
+"use client"
 import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Newspaper, GraduationCap, Video, BookOpen, Bot, Languages, Library } from 'lucide-react';
 
-const JetHatScrollFeatureSection = () => {
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const HomeProductsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
   const cards = [
     {
       title: 'MAG-AI',
@@ -112,97 +125,130 @@ const JetHatScrollFeatureSection = () => {
   ];
 
   useEffect(() => {
-    const numCards = cards.length;
-    const cardGap = 20;
-    let ticking = false;
-
-    const updateCards = () => {
-      if (!containerRef.current) return;
-
-      const start = containerRef.current.offsetTop;
-      const end = start + containerRef.current.offsetHeight - window.innerHeight;
-      let progress = 0;
-      if (end > start) {
-        progress = Math.max(0, Math.min(1, (window.scrollY - start) / (end - start)));
-      }
-
-      cards.forEach((_, index) => {
-        const card = cardRefs.current[index];
-        if (!card) return;
-
-        const cardStart = index / numCards;
-        const cardEnd = (index + 0.7) / numCards;
-        const stackedPosition = index * cardGap;
-        const isFirst = index === 0;
-
-        // Smooth easing functions
-        const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
-        const easeInOutQuart = (t: number) => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
-
-        // Y position with smooth easing
-        let y;
-        if (progress <= cardStart) {
-          y = isFirst ? stackedPosition : 900;
-        } else if (progress >= cardEnd) {
-          y = stackedPosition;
-        } else {
-          const frac = (progress - cardStart) / (cardEnd - cardStart);
-          const easedFrac = easeOutQuart(frac);
-          y = isFirst ? stackedPosition : 900 + easedFrac * (stackedPosition - 900);
-        }
-
-        // Scale with smooth easing
-        let scale;
-        if (progress <= cardStart) {
-          scale = isFirst ? 1 : 0.9;
-        } else if (progress >= cardEnd) {
-          scale = 1;
-        } else {
-          const frac = (progress - cardStart) / (cardEnd - cardStart);
-          const easedFrac = easeInOutQuart(frac);
-          scale = isFirst ? 1 : 0.9 + easedFrac * 0.1;
-        }
-
-        // Opacity with smooth fade
-        let opacity = 1;
-        if (!isFirst) {
-          const fadeStart = cardStart;
-          const fadeEnd = cardStart + 0.12 / numCards;
-          if (progress <= fadeStart) {
-            opacity = 0;
-          } else if (progress < fadeEnd) {
-            const fadeFrac = (progress - fadeStart) / (fadeEnd - fadeStart);
-            opacity = easeInOutQuart(fadeFrac);
-          } else {
-            opacity = 1;
-          }
-        }
-
-        // Blur effect for depth
-        const blur = progress < cardStart ? (isFirst ? 0 : 3) : 0;
-
-        card.style.transform = `translateY(${y}px) scale(${scale})`;
-        card.style.opacity = `${opacity}`;
-        card.style.filter = `blur(${blur}px)`;
-        card.style.zIndex = `${index + 1}`;
+    const ctx = gsap.context(() => {
+      // Set initial states for header elements
+      gsap.set([titleRef.current, descriptionRef.current], {
+        opacity: 0,
+        y: 50
       });
 
-      ticking = false;
-    };
+      // Header animation
+      const headerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
 
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(updateCards);
-        ticking = true;
-      }
-    };
+      headerTl.to(titleRef.current, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: "power3.out" 
+      })
+      .to(descriptionRef.current, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.7, 
+        ease: "power2.out" 
+      }, "-=0.5");
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    updateCards(); // Initial call
+      // Proper stacked cards scroll animation
+      const numCards = cards.length;
+      const cardGap = 25;
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+      // Set initial positions - all cards start in their final stacked positions
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        
+        gsap.set(card, {
+          y: index === 0 ? 0 : 800, // First card visible, others below
+          opacity: index === 0 ? 1 : 0,
+          scale: index === 0 ? 1 : 0.9,
+          zIndex: index + 1, // Higher index = higher z-index (front)
+          filter: index === 0 ? "blur(0px)" : "blur(2px)"
+        });
+      });
+
+      // Create ScrollTrigger for stacked animation
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.5,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          
+          cardRefs.current.forEach((card, index) => {
+            if (!card) return;
+
+            // Sequential timing - each card waits for previous to start
+            const cardStart = index * 0.15; // 15% gap between each card start
+            const cardEnd = cardStart + 0.25; // Each card takes 25% to animate
+            const finalY = index * cardGap; // Final stacked position
+
+            let y, scale, opacity, blur;
+
+            if (progress <= cardStart) {
+              // Card hasn't started yet - stays hidden below
+              y = index === 0 ? finalY : 800;
+              scale = index === 0 ? 1 : 0.9;
+              opacity = index === 0 ? 1 : 0;
+              blur = index === 0 ? 0 : 2;
+            } else if (progress >= cardEnd) {
+              // Card animation complete - in final stacked position
+              y = finalY;
+              scale = 1;
+              opacity = 1;
+              blur = 0;
+            } else {
+              // Card is currently animating up
+              const cardProgress = (progress - cardStart) / (cardEnd - cardStart);
+              const eased = 1 - Math.pow(1 - cardProgress, 3); // easeOutCubic
+              
+              y = index === 0 ? finalY : 800 * (1 - eased) + finalY * eased;
+              scale = 0.9 + (0.1 * eased);
+              opacity = index === 0 ? 1 : eased;
+              blur = 2 * (1 - eased);
+            }
+
+            // Apply smooth transforms
+            gsap.set(card, {
+              y: y,
+              scale: scale,
+              opacity: opacity,
+              filter: `blur(${blur}px)`,
+              zIndex: index + 1 // Cards with higher index appear in front
+            });
+          });
+        }
+      });
+
+      // Hover effects
+      cardRefs.current.forEach((card) => {
+        if (!card) return;
+
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.02,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, [cards.length]);
 
   const handleLearnMore = (title: string) => {
@@ -210,20 +256,23 @@ const JetHatScrollFeatureSection = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-orange-50
-     via-amber-50 to-orange-100 dark:from-black/30
-  dark:via-black dark:to-gray-800">
+    <section 
+      ref={sectionRef}
+      className="py-16 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 dark:from-black/30 dark:via-black dark:to-gray-800"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl 
-          font-bold bg-gradient-to-r from-[#FF8C00] via-[#ff6a00] to-[#FF8C00]
-           dark:from-[#FF8C00]  dark:text-white
-          dark:via-[#ff8000] dark:to-[#FF8C00] bg-clip-text text-transparent mb-4">
+        <div className="text-center z-20 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 dark:from-black/30 dark:via-black dark:to-gray-800 py-4">
+          <h2 
+            ref={titleRef}
+            className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#FF8C00] via-[#ff6a00] to-[#FF8C00] dark:from-[#FF8C00] dark:text-white dark:via-[#ff8000] dark:to-[#FF8C00] bg-clip-text text-transparent mb-4"
+          >
             Our Products
           </h2>
-          <p className="text-xl text-gray-700 dark:text-gray-300
-           max-w-3xl mx-auto">
+          <p 
+            ref={descriptionRef}
+            className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto"
+          >
             Fortify your digital fortress with our cutting-edge cybersecurity solutions.
             Elevate your business through bespoke software development, where innovation meets functionality.
           </p>
@@ -232,21 +281,15 @@ const JetHatScrollFeatureSection = () => {
         {/* Cards container */}
         <div
           ref={containerRef}
-          className="relative mb-20 "
-          data-container
+          className="relative"
         >
-          <div className="sticky top-0 h-screen flex items-center justify-center 
-          overflow-hidden py-8">
-            <div className="relative h-[500px] md:h-[500px] w-full">
+          <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden py-16">
+            <div className="relative mt-28 h-full md:h-[90vh] w-full max-w-6xl mx-auto">
               {cards.map((card, index) => (
                 <div
                   key={index}
                   ref={(el) => { cardRefs.current[index] = el; }}
-                  className="card absolute top-0 left-0 right-0 mx-auto w-full h-[500px] bg-white/95 dark:bg-black/90 
-                  backdrop-blur-sm rounded-3xl shadow-2xl border border-[#FF8C00]/20 dark:border-[gray]/30 will-change-transform
-                   hover:border-[#FF8C00]/40 dark:hover:border-[white]/50 overflow-hidden"
-                  data-index={index}
-                  style={{ transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out, filter 0.5s ease-out' }}
+                  className="card absolute top-0 left-0 right-0 mx-auto w-full h-[600px] bg-white/95 dark:bg-black/90 backdrop-blur-sm will-change-transform border-t-0 border-amber-50 shadow-2xl hover:border-[#FF8C00]/40 dark:hover:border-[white]/50 overflow-hidden rounded-2xl"
                 >
                   <div className="flex items-center h-full p-6 md:p-10">
                     {/* Left side - Content */}
@@ -307,11 +350,11 @@ const JetHatScrollFeatureSection = () => {
           </div>
 
           {/* Spacer to enable scrolling */}
-          <div className="h-[300vh]" />
+          <div className="h-[400vh]" />
         </div>
       </div>
     </section>
   );
 };
 
-export default JetHatScrollFeatureSection;
+export default HomeProductsSection;

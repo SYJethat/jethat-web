@@ -219,6 +219,8 @@ export function HomeSection() {
               </div>
             </div>
           </div>
+
+       
         </div>
 
         <style jsx>{`

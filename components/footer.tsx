@@ -1,4 +1,6 @@
 import { Shield, Mail, Phone, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import Image from 'next/image';
+import Logo from "../public/logo2.png"
 
 export function Footer() {
   const services = [
@@ -25,8 +27,13 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4 text-center md:text-left w-full md:w-auto">
             <div className="flex items-center justify-center md:justify-start space-x-2">
-              <Shield className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold">JetHat Cyber Security Pvt Ltd</span>
+              {/* <Shield className="h-8 w-8 text-primary" /> */}
+
+              <Image
+              src = {Logo}
+              width={100}></Image>
+              
+              <span className="text-2xl font-bold">JetHat Cyber Security</span>
             </div>
             <p className="text-sm text-muted-foreground max-w-sm mx-auto md:mx-0">
               Securing Tomorrow's Digital Innovation since 2018. Empowering businesses with cybersecurity, AI, and cloud

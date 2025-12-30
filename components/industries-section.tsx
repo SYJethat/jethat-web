@@ -190,7 +190,7 @@ export function IndustriesSection() {
     <section className="py-16 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-4 animate-fade-in">
+        <div className="text-center sticky top-32 mb-4 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
             Industries We <span className="bg-gradient-to-r from-[#FF8C00] via-[#FFB300] to-[#FF8C00] bg-clip-text text-transparent">Serve</span>
           </h2>
@@ -201,13 +201,13 @@ export function IndustriesSection() {
 
         {/* Cards container */}
         <div ref={containerRef} className="relative" data-container>
-          <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden py-8">
-            <div className="relative h-[500px] md:h-[500px] w-full">
+          <div className="sticky top-48 h-screen flex items-center justify-center overflow-hidden py-8">
+            <div className="relative h-[90vh] md:h-[90vh] w-full">
               {industries.map((industry, index) => (
                 <div
                   key={index}
                   ref={(el) => { cardRefs.current[index] = el; }}
-                  className="card absolute top-0 left-0 right-0 mx-auto w-full h-[500px] bg-white dark:bg-gray-900/95 backdrop-blur-sm rounded-3xl shadow-2xl border border-[#FF8C00]/20 dark:border-[#FF8C00]/30 will-change-transform hover:border-[#FF8C00]/40 dark:hover:border-[#FF8C00]/50 overflow-hidden"
+                  className="card absolute top-0 left-0 right-0 mx-auto w-full h-[500px] bg-white dark:bg-gray-900/95 backdrop-blur-sm  shadow-2xl dark:border-[#FF8C00]/30 will-change-transform hover:border-[#FF8C00]/40 dark:hover:border-[#FF8C00]/50 overflow-hidden"
                   data-index={index}
                   style={{ transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out, filter 0.5s ease-out' }}
                 >

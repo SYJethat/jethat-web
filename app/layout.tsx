@@ -8,6 +8,7 @@ import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { ThemeToggle } from "@/components/themetogle"
+import GSAPProvider from "@/components/gsap-provider"
 
 export const metadata: Metadata = {
   title: "JetHat Cyber Security - Securing Tomorrow's Digital Innovation",
@@ -34,12 +35,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <Suspense fallback={null}>
-            {children}
+          <GSAPProvider>
+            <Suspense fallback={null}>
+              {children}
 
-            <ThemeToggle/>
-            <ScrollProgress />
-          </Suspense>
+              <ThemeToggle/>
+              <ScrollProgress />
+            </Suspense>
+          </GSAPProvider>
           <Analytics />
         </ThemeProvider>
       </body>

@@ -1,232 +1,307 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Code, Cloud, Smartphone, ShieldAlert, BookOpen, Search, Database, Cpu, Lock, Zap } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Code, Cloud, Smartphone, ShieldAlert, Zap, ArrowRight, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
 
-const ServicesSection = () => {
-  const services = [
-    {
-      title: "Web Development",
-      shortDescription: "Crafting seamless digital experiences",
-      fullDescription: "Transform your digital presence with cutting-edge web development. We create responsive, scalable, and user-centric web applications that drive business growth and deliver exceptional user experiences.",
-      points: ["Full-stack Development", "Responsive Design", "Progressive Web Apps", "API Integration"],
-      icon: Code,
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-500/10",
-    },
-    {
-      title: "Cloud Services",
-      shortDescription: "Unlock unparalleled scalability",
-      fullDescription: "Harness the power of cloud computing with our comprehensive cloud services. We help you migrate, optimize, and manage your infrastructure for maximum efficiency and cost-effectiveness.",
-      points: ["Cloud Migration", "Infrastructure Management", "Auto-scaling Solutions", "Cost Optimization"],
-      icon: Cloud,
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-      color: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-500/10",
-    },
-    {
-      title: "Mobile App Development",
-      shortDescription: "Elevate your brand's presence",
-      fullDescription: "Create powerful mobile experiences that engage users and drive conversions. Our expert team delivers native and cross-platform applications with stunning UI/UX design.",
-      points: ["iOS & Android Development", "Cross-Platform Solutions", "UI/UX Design", "App Store Optimization"],
-      icon: Smartphone,
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-green-500/10",
-    },
-    {
-      title: "Cyber Security",
-      shortDescription: "Protect your digital assets",
-      fullDescription: "Safeguard your business with enterprise-grade cybersecurity solutions. We provide comprehensive protection against evolving threats with advanced detection and prevention systems.",
-      points: ["Threat Detection & Prevention", "Security Audits", "Penetration Testing", "Compliance Management"],
-      icon: ShieldAlert,
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
-      color: "from-red-500 to-orange-500",
-      bgColor: "bg-red-500/10",
-    },
-    {
-      title: "E-Learning Solutions",
-      shortDescription: "Revolutionize education",
-      fullDescription: "Transform learning experiences with our innovative e-learning platforms. We create engaging, interactive, and accessible educational solutions for modern learners.",
-      points: ["LMS Development", "Interactive Content", "Virtual Classrooms", "Progress Tracking"],
-      icon: BookOpen,
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
-      color: "from-yellow-500 to-orange-500",
-      bgColor: "bg-yellow-500/10",
-    },
-    {
-      title: "Secure Code Review",
-      shortDescription: "Elevate software security",
-      fullDescription: "Ensure your codebase is secure and resilient with our comprehensive code review services. We identify vulnerabilities and provide actionable recommendations for improvement.",
-      points: ["Vulnerability Assessment", "Code Quality Analysis", "Security Best Practices", "Compliance Verification"],
-      icon: Search,
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80",
-      color: "from-indigo-500 to-purple-500",
-      bgColor: "bg-indigo-500/10",
-    },
-    {
-      title: "AI & Machine Learning",
-      shortDescription: "Intelligent automation solutions",
-      fullDescription: "Leverage artificial intelligence and machine learning to automate processes, gain insights, and make data-driven decisions that propel your business forward.",
-      points: ["Predictive Analytics", "Natural Language Processing", "Computer Vision", "Automation Solutions"],
-      icon: Cpu,
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
-      color: "from-pink-500 to-rose-500",
-      bgColor: "bg-pink-500/10",
-    },
-    {
-      title: "DevOps & Automation",
-      shortDescription: "Streamline your workflow",
-      fullDescription: "Accelerate development and deployment with our DevOps expertise. We implement CI/CD pipelines, infrastructure as code, and automation to boost productivity.",
-      points: ["CI/CD Pipelines", "Infrastructure as Code", "Container Orchestration", "Monitoring & Logging"],
-      icon: Zap,
-      image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80",
-      color: "from-teal-500 to-cyan-500",
-      bgColor: "bg-teal-500/10",
-    },
-  ];
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-  const [selectedService, setSelectedService] = useState(services[0]);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+const services = [
+  {
+    id: "web-development",
+    title: "Web Development",
+    subtitle: "Crafting Digital Excellence",
+    description: "Transform your digital presence with cutting-edge web development. We create responsive, scalable, and user-centric web applications that drive business growth and deliver exceptional user experiences.",
+    features: [
+      "Full-stack Development",
+      "Responsive Design", 
+      "Progressive Web Apps",
+      "API Integration"
+    ],
+    icon: Code,
+    color: "from-blue-500 to-cyan-500",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80",
+    badge: "Development"
+  },
+  {
+    id: "cloud-services",
+    title: "Cloud Services",
+    subtitle: "Scalable Infrastructure Solutions",
+    description: "Harness the power of cloud computing with our comprehensive cloud services. We help you migrate, optimize, and manage your infrastructure for maximum efficiency and cost-effectiveness.",
+    features: [
+      "Cloud Migration",
+      "Infrastructure Management",
+      "Auto-scaling Solutions",
+      "Cost Optimization"
+    ],
+    icon: Cloud,
+    color: "from-purple-500 to-pink-500",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    badge: "Cloud"
+  },
+  {
+    id: "mobile-development",
+    title: "Mobile App Development",
+    subtitle: "Mobile-First Innovation",
+    description: "Create powerful mobile experiences that engage users and drive conversions. Our expert team delivers native and cross-platform applications with stunning UI/UX design.",
+    features: [
+      "iOS & Android Development",
+      "Cross-Platform Solutions",
+      "UI/UX Design",
+      "App Store Optimization"
+    ],
+    icon: Smartphone,
+    color: "from-green-500 to-emerald-500",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
+    badge: "Mobile"
+  },
+  {
+    id: "cybersecurity",
+    title: "Cyber Security",
+    subtitle: "Advanced Threat Protection",
+    description: "Safeguard your business with enterprise-grade cybersecurity solutions. We provide comprehensive protection against evolving threats with advanced detection and prevention systems.",
+    features: [
+      "Threat Detection & Prevention",
+      "Security Audits",
+      "Penetration Testing",
+      "Compliance Management"
+    ],
+    icon: ShieldAlert,
+    color: "from-red-500 to-orange-500",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80",
+    badge: "Security"
+  }
+];
+
+const HomeServicesSection = () => {
+  const [currentService, setCurrentService] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial states
+      gsap.set([badgeRef.current, titleRef.current, subtitleRef.current, descriptionRef.current, ctaRef.current], {
+        opacity: 0,
+        y: 50
+      });
+      gsap.set(featuresRef.current?.children || [], { opacity: 0, y: 30 });
+
+      // Parallax for image
+      gsap.fromTo(imageRef.current,
+        { scale: 1, x: "5%" },
+        {
+          scale: 1.05,
+          x: "-5%",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          }
+        }
+      );
+
+      // Content animation timeline
+      const contentTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      contentTl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" })
+              .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
+              .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
+              .to(descriptionRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+              .to(featuresRef.current?.children || [], { opacity: 1, y: 0, duration: 0.5, stagger: 0.2, ease: "power2.out" }, "-=0.3")
+              .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3");
+
+      // Cards animation
+      gsap.to(cardsRef.current?.children || [], {
+        opacity: 1,
+        scale: 1,
+        rotationY: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Auto-rotate services
+      const interval = setInterval(() => {
+        setCurrentService((prev) => (prev + 1) % services.length);
+      }, 5000);
+
+      return () => clearInterval(interval);
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Animate content change when service changes
+  useEffect(() => {
+    if (titleRef.current && subtitleRef.current && descriptionRef.current) {
+      gsap.fromTo([titleRef.current, subtitleRef.current, descriptionRef.current],
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }
+      );
+    }
+  }, [currentService]);
+
+  const currentServiceData = services[currentService];
 
   return (
-    <section id="services" className="py-16 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Our <span className="bg-gradient-to-r from-[#FF8C00] via-[#FFB300] to-[#FF8C00] bg-clip-text text-transparent">Services</span>
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Fortify your digital fortress with our cutting-edge cybersecurity solutions. Elevate your business through
-            bespoke software development, where innovation meets functionality.
-          </p>
-        </div>
+    <section ref={sectionRef} className="relative py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,140,0,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,140,0,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Sidebar - Service Cards */}
-          <div className="lg:col-span-1 space-y-3">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`group cursor-pointer p-4 rounded-2xl border transition-all duration-300 ${
-                    selectedService.title === service.title
-                      ? `${service.bgColor} border-[#FF8C00] shadow-lg shadow-[#FF8C00]/20`
-                      : 'bg-white dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 hover:border-[#FF8C00]/50'
-                  } ${hoveredIndex === index ? 'scale-105' : ''}`}
-                  onClick={() => setSelectedService(service)}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className={`p-3 rounded-xl ${service.bgColor} transition-all duration-300 ${
-                      selectedService.title === service.title ? 'scale-110' : ''
-                    }`}>
-                      <Icon className={`w-5 h-5 ${
-                        selectedService.title === service.title ? 'text-[#FF8C00]' : 'text-gray-600 dark:text-gray-400'
-                      }`} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className={`font-semibold text-sm mb-1 transition-colors ${
-                        selectedService.title === service.title
-                          ? 'text-[#FF8C00]'
-                          : 'text-gray-900 dark:text-white'
-                      }`}>
-                        {service.title}
-                      </h3>
-                      <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
-                        {service.shortDescription}
-                      </p>
-                    </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left Content */}
+          <div className="order-2 lg:order-2">
+            {/* Badge */}
+            <div ref={badgeRef} className="inline-flex items-center px-4 py-2 bg-[#FF8C00]/20 backdrop-blur-sm rounded-full border border-[#FF8C00]/30 mb-6">
+              <currentServiceData.icon className="w-4 h-4 mr-2 text-[#FF8C00]" />
+              <span className="text-sm font-medium text-[#FF8C00]">{currentServiceData.badge}</span>
+            </div>
+
+            {/* Title */}
+            <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+              {currentServiceData.title}
+            </h2>
+
+            {/* Subtitle */}
+            <h3 ref={subtitleRef} className="text-xl md:text-2xl font-semibold mb-6">
+              <span className={`bg-gradient-to-r ${currentServiceData.color} bg-clip-text text-transparent`}>
+                {currentServiceData.subtitle}
+              </span>
+            </h3>
+
+            {/* Description */}
+            <p ref={descriptionRef} className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-lg">
+              {currentServiceData.description}
+            </p>
+
+            {/* Features */}
+            <div ref={featuresRef} className="space-y-4 mb-8">
+              {currentServiceData.features.map((feature, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <div className={`flex-shrink-0 w-6 h-6 bg-gradient-to-r ${currentServiceData.color} rounded-full flex items-center justify-center mt-1`}>
+                    <CheckCircle className="w-4 h-4 text-white" />
                   </div>
-                </motion.div>
-              );
-            })}
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <button ref={ctaRef} className={`px-8 py-4 bg-gradient-to-r ${currentServiceData.color} hover:shadow-xl rounded-full font-semibold text-white shadow-lg transition-all duration-300 group`}>
+              Get Started
+              <ArrowRight className="w-5 h-5 ml-2 inline group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+
+            {/* Service Navigation Dots */}
+            <div className="flex space-x-3 mt-8">
+              {services.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentService(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentService 
+                      ? `bg-gradient-to-r ${currentServiceData.color} scale-125` 
+                      : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Right Content - Selected Service Details */}
-          <div className="lg:col-span-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedService.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-gray-900/95 rounded-3xl shadow-2xl border border-[#FF8C00]/20 dark:border-[#FF8C00]/30 overflow-hidden h-full"
-              >
-                {/* Image Header */}
-                <div className="relative h-64 md:h-80 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10" />
-                  <Image
-                    src={selectedService.image}
-                    alt={selectedService.title}
-                    fill
-                    className="object-cover"
-                  />
-                  
-                  {/* Floating Icon Badge */}
-                  <div className="absolute top-6 right-6 z-20">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${selectedService.color} shadow-xl`}>
-                      <selectedService.icon className="w-8 h-8 text-white" />
-                    </div>
-                  </div>
+          {/* Right Image */}
+          <div className="order-1 bg-white lg:order-1 relative h-96 lg:h-[500px]">
+            <div ref={imageRef} className="relative w-[60vh]  mr-10 h-[50vh]  overflow-hidden shadow-2xl">
+              <Image
+                src={currentServiceData.image}
+                alt={currentServiceData.title}
+                fill
+                className="object-cover transition-all duration-1000"
+                priority
+              />
+              {/* <div className={`absolute inset-0 bg-gradient-to-br ${currentServiceData.color} opacity-20`} /> */}
+            </div>
 
-                  {/* Title Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                      {selectedService.title}
-                    </h3>
-                    <p className="text-white/90 text-lg">
-                      {selectedService.shortDescription}
-                    </p>
-                  </div>
+            {/* Floating Cards */}
+            <div ref={cardsRef} className="absolute inset-0 p-6 space-y-4 pointer-events-none">
+              {/* Card 1 - Service Stats */}
+              <div className="absolute top-10 right-10 w-64 h-32 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 p-4 shadow-xl opacity-0 scale-80">
+                <div className="flex items-center justify-between mb-3">
+                  <currentServiceData.icon className="w-5 h-5 text-white" />
+                  <div className="text-xs bg-green-500/20 px-2 py-1 rounded-full text-white">Active</div>
                 </div>
+                <div className="space-y-2">
+                  <div className="h-3 bg-white/30 rounded-full w-4/5"></div>
+                  <div className="h-3 bg-white/20 rounded-full w-3/5"></div>
+                </div>
+                <div className="text-xs text-white/80 mt-2">Projects Completed: 150+</div>
+              </div>
 
-                {/* Content */}
-                <div className="p-6 md:p-8">
-                  <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-6">
-                    {selectedService.fullDescription}
-                  </p>
+              {/* Card 2 - Performance Metrics */}
+              <div className="absolute bottom-10 left-10 w-56 h-24 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 p-4 shadow-lg opacity-0 scale-80">
+                <div className="flex items-center mb-2">
+                  <Zap className="w-4 h-4 text-yellow-400 mr-2" />
+                  <span className="text-sm font-medium text-white">Performance</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-300">
+                  <span>Success Rate</span>
+                  <span className="font-bold text-green-400">99.8%</span>
+                </div>
+                <div className="w-full bg-white/10 rounded-full h-1 mt-1">
+                  <div className={`bg-gradient-to-r ${currentServiceData.color} h-1 rounded-full w-[99%]`}></div>
+                </div>
+              </div>
 
-                  {/* Features Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                    {selectedService.points.map((point, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-start space-x-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 hover:border-[#FF8C00]/50 transition-all duration-300 group"
-                      >
-                        <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${selectedService.color} mt-2 group-hover:scale-150 transition-transform duration-300`} />
-                        <span className="text-sm font-medium text-gray-800 dark:text-gray-200 flex-1">
-                          {point}
-                        </span>
-                      </div>
+              {/* Card 3 - Client Satisfaction */}
+              <div className="absolute top-1/2 left-4 w-48 h-20 bg-white/8 backdrop-blur-xl rounded-xl border border-white/15 p-3 shadow-lg opacity-0 scale-80">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-xs text-white/70">Client Satisfaction</div>
+                    <div className="text-lg font-bold text-white">4.9/5</div>
+                  </div>
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i} className="w-2 h-2 bg-yellow-400 rounded-full"></div>
                     ))}
                   </div>
-
-                  {/* CTA Buttons */}
-                  <div className="flex flex-wrap gap-3">
-                    <button className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB300] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                      <span>Get Started</span>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </button>
-                    <button className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-full border-2 border-[#FF8C00] hover:bg-[#FF8C00] hover:text-white transition-all duration-300">
-                      Learn More
-                    </button>
-                  </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -234,4 +309,4 @@ const ServicesSection = () => {
   );
 };
 
-export default ServicesSection;
+export default HomeServicesSection;

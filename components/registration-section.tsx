@@ -59,25 +59,26 @@ const RegistrationSection = () => {
 
   return (
     <section className="py-16 bg-gradient-to-br from-orange-50 via-white to-amber-50 dark:from-gray-900 dark:via-black dark:to-gray-800">
-      <div className="container justify-center mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container justify-start mx-auto px-4 sm:px-6 lg:px-8">
+        <div className='flex flex-row'>
         {/* Header */}
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl  text-left md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             We are <span className="bg-gradient-to-r from-[#FF8C00] via-[#FFB300] to-[#FF8C00] bg-clip-text text-transparent">Registered With</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-left text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Certified and registered with leading government bodies and international standards organizations
           </p>
-        </motion.div> */}
+        </motion.div>
 
         {/* Certifications Row */}
-        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {certifications.map((cert, index) => {
             const Icon = cert.icon;
             return (
@@ -99,7 +100,9 @@ const RegistrationSection = () => {
               </motion.div>
             );
           })}
-        </div> */}
+        </div>
+
+        </div>
 
         {/* Registration Cards Grid - Circular Design */}
         <div className="flex justify-center">
@@ -117,12 +120,12 @@ const RegistrationSection = () => {
               {/* Circular Card */}
               <div className="relative">
                 {/* Outer Ring */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FFB300] opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+                <div className="absolute inset-0   opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
                 
                 {/* Main Circle */}
-                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-white dark:bg-gray-900/50 border-4 border-[#FF8C00]/20 group-hover:border-[#FF8C00] transition-all duration-300 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#FF8C00]/30 flex items-center justify-center overflow-hidden">
+                <div className="relative w-16 h-16 md:w-16 md:h-16  rounded-full transition-all duration-300 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#FF8C00]/30 flex items-center justify-center overflow-hidden">
                   {/* Logo */}
-                  <div className="relative w-20 h-20 md:w-24 md:h-24">
+                  <div className="relative w-16 h-16 md:w-24 md:h-24">
                     <Image
                       src={reg.logo}
                       alt={reg.name}
@@ -136,24 +139,24 @@ const RegistrationSection = () => {
                 </div>
 
                 {/* Verified Badge */}
-                <div className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center shadow-lg border-2 border-white dark:border-gray-900">
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center shadow-lg border-2 border-white dark:border-gray-900">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
               </div>
 
               {/* Content Below Circle */}
               <div className="mt-4 text-center">
-                <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white mb-1 line-clamp-2">
+                <h3 className="text-[0.9rem] md:text-base font-bold text-gray-900 dark:text-white mb-1 line-clamp-2">
                   {reg.name}
                 </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">
+                <p className="text-[0.8rem] text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">
                   {reg.description}
                 </p>
                 
                 {/* Badge */}
-                <div className="inline-flex items-center space-x-1 px-3 py-1 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB300]/10 rounded-full border border-[#FF8C00]/30">
+                {/* <div className="inline-flex items-center space-x-1 px-3 py-1 bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB300]/10 rounded-full border border-[#FF8C00]/30">
                   <span className="text-xs font-semibold text-[#FF8C00] truncate">{reg.badge}</span>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}
@@ -182,13 +185,13 @@ const RegistrationSection = () => {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center space-x-3 px-8 py-4 bg-white dark:bg-gray-900/50 rounded-full border border-[#FF8C00]/30 shadow-lg">
+          {/* <div className="inline-flex items-center space-x-3 px-8 py-4 bg-white dark:bg-gray-900/50 rounded-full border border-[#FF8C00]/30 shadow-lg">
             <Shield className="w-6 h-6 text-[#FF8C00]" />
             <span className="text-lg font-semibold text-gray-900 dark:text-white">
               Trusted by 200+ Organizations Across India
             </span>
             <CheckCircle className="w-6 h-6 text-green-500" />
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </section>
